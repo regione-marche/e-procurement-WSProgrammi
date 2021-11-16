@@ -1,0 +1,2818 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Servizio di pubblicazione programmazione lavori, beni e servizi",
+    "version" : "5.2.0",
+    "title" : "WSProgrammi"
+  },
+  "tags" : [ {
+    "name" : "Programmi"
+  } ],
+  "paths" : {
+    "/Programmi/DettaglioFornitureServizi" : {
+      "get" : {
+        "tags" : [ "Programmi" ],
+        "summary" : "Estrae il dettaglio di un programma di forniture e servizi in base all'id passato come parametro",
+        "description" : "",
+        "operationId" : "ProgrammiRestService.dettaglioFornitureServizi",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "idRicevuto",
+          "in" : "query",
+          "description" : "Identificativo univoco SCP - IdRicevuto",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "description" : "Token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione effettuata con successo",
+            "schema" : {
+              "$ref" : "#/definitions/DettaglioFornitureServiziResult"
+            }
+          },
+          "400" : {
+            "description" : "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"
+          },
+          "401" : {
+            "description" : "Non si possiedono le credenziali per questo programma (si veda l'attributo error della risposta)"
+          },
+          "404" : {
+            "description" : "Il programma richiesto non è stato trovato (si veda l'attributo error della risposta)"
+          },
+          "500" : {
+            "description" : "Errori durante l'esecuzione dell'operazione (si veda l'attributo error della risposta)"
+          }
+        }
+      }
+    },
+    "/Programmi/DettaglioLavori" : {
+      "get" : {
+        "tags" : [ "Programmi" ],
+        "summary" : "Estrae il dettaglio di un programma di lavori in base all'id passato come parametro",
+        "description" : "",
+        "operationId" : "ProgrammiRestService.dettaglioLavori",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "idRicevuto",
+          "in" : "query",
+          "description" : "Identificativo univoco SCP - IdRicevuto",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "description" : "Token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione effettuata con successo",
+            "schema" : {
+              "$ref" : "#/definitions/DettaglioLavoriResult"
+            }
+          },
+          "400" : {
+            "description" : "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"
+          },
+          "401" : {
+            "description" : "Non si possiedono le credenziali per questo programma (si veda l'attributo error della risposta)"
+          },
+          "404" : {
+            "description" : "Il programma richiesto non è stato trovato (si veda l'attributo error della risposta)"
+          },
+          "500" : {
+            "description" : "Errori durante l'esecuzione dell'operazione (si veda l'attributo error della risposta)"
+          }
+        }
+      }
+    },
+    "/Programmi/PubblicaDM112011" : {
+      "post" : {
+        "tags" : [ "Programmi" ],
+        "summary" : "[Deprecato] Pubblica i dati e i documenti relativi ad un programma DM 11/2011",
+        "description" : "Ritorna il risultato della pubblicazione e l'id assegnato dal sistema, che dovrà essere riutilizzato per successive pubblicazioni",
+        "operationId" : "ProgrammiRestService.pubblicaDM112011",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Programma da pubblicare [Model=PubblicaProgrammaDM112011Entry]",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PubblicaProgrammaDM112011Entry"
+          }
+        }, {
+          "name" : "modalitaInvio",
+          "in" : "query",
+          "description" : "Se valorizzato a '1' effettua solo il controllo dei dati, '2' effettua controllo e pubblicazione",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "description" : "Token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione effettuata con successo",
+            "schema" : {
+              "$ref" : "#/definitions/PubblicazioneResult"
+            }
+          },
+          "400" : {
+            "description" : "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"
+          },
+          "500" : {
+            "description" : "Errori durante l'esecuzione dell'operazione (si veda l'attributo error della risposta)"
+          }
+        }
+      }
+    },
+    "/Programmi/PubblicaFornitureServizi" : {
+      "post" : {
+        "tags" : [ "Programmi" ],
+        "summary" : "Pubblica i dati e i documenti relativi ad un programma di forniture e servizi",
+        "description" : "Ritorna il risultato della pubblicazione e l'id assegnato dal sistema, che dovrà essere riutilizzato per successive pubblicazioni",
+        "operationId" : "ProgrammiRestService.pubblicaFornitureServizi",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Programma da pubblicare [Model=PubblicaProgrammaFornitureServiziEntry]",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PubblicaProgrammaFornitureServiziEntry"
+          }
+        }, {
+          "name" : "modalitaInvio",
+          "in" : "query",
+          "description" : "Se valorizzato a '1' effettua solo il controllo dei dati, '2' effettua controllo e pubblicazione",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "description" : "Token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione effettuata con successo",
+            "schema" : {
+              "$ref" : "#/definitions/PubblicazioneResult"
+            }
+          },
+          "400" : {
+            "description" : "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"
+          },
+          "500" : {
+            "description" : "Errori durante l'esecuzione dell'operazione (si veda l'attributo error della risposta)"
+          }
+        }
+      }
+    },
+    "/Programmi/PubblicaLavori" : {
+      "post" : {
+        "tags" : [ "Programmi" ],
+        "summary" : "Pubblica i dati e i documenti relativi ad un programma di lavori",
+        "description" : "Ritorna il risultato della pubblicazione e l'id assegnato dal sistema, che dovrà essere riutilizzato per successive pubblicazioni",
+        "operationId" : "ProgrammiRestService.pubblicaLavori",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Programma da pubblicare [Model=PubblicaProgrammaLavoriEntry]",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PubblicaProgrammaLavoriEntry"
+          }
+        }, {
+          "name" : "modalitaInvio",
+          "in" : "query",
+          "description" : "Se valorizzato a '1' effettua solo il controllo dei dati, '2' effettua controllo e pubblicazione",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "description" : "Token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione effettuata con successo",
+            "schema" : {
+              "$ref" : "#/definitions/PubblicazioneResult"
+            }
+          },
+          "400" : {
+            "description" : "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"
+          },
+          "500" : {
+            "description" : "Errori durante l'esecuzione dell'operazione (si veda l'attributo error della risposta)"
+          }
+        }
+      }
+    },
+    "/Programmi/PubblicaPdf" : {
+      "post" : {
+        "tags" : [ "Programmi" ],
+        "summary" : "[Deprecato] Inserisce il documento pdf del programma",
+        "description" : "Ritorna l'esito dell'inserimento",
+        "operationId" : "ProgrammiRestService.pubblicaPdf",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "idRicevuto",
+          "in" : "query",
+          "description" : "Id univoco generato dal sistema per il programma pubblicato",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "File pdf del programma",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InputStream"
+          }
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "description" : "Token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione effettuata con successo",
+            "schema" : {
+              "$ref" : "#/definitions/PubblicazioneResult"
+            }
+          },
+          "400" : {
+            "description" : "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"
+          },
+          "500" : {
+            "description" : "Errori durante l'esecuzione dell'operazione (si veda l'attributo error della risposta)"
+          }
+        }
+      }
+    },
+    "/Programmi/ScaricaPdf" : {
+      "get" : {
+        "tags" : [ "Programmi" ],
+        "summary" : "Effettua il download del pdf relativo al programma",
+        "description" : "",
+        "operationId" : "ProgrammiRestService.scaricaPdf",
+        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "produces" : [ "application/octet-stream" ],
+        "parameters" : [ {
+          "name" : "idRicevuto",
+          "in" : "query",
+          "description" : "Identificativo univoco SCP - IdRicevuto",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "description" : "Token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/Programmi/Version" : {
+      "get" : {
+        "tags" : [ "Programmi" ],
+        "summary" : "Metodo che ritorna la versione del servizio",
+        "description" : "",
+        "operationId" : "ProgrammiRestService.version",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "AcquistoEntry" : {
+      "type" : "object",
+      "required" : [ "anno", "cui", "descrizione", "settore" ],
+      "properties" : {
+        "cui" : {
+          "type" : "string",
+          "description" : "Numero intervento CUI (‘F’ + CodiceFiscale Stazione Appaltante(11 char) + anno (4 char) + progressivo (5 char))",
+          "minLength" : 0,
+          "maxLength" : 25
+        },
+        "settore" : {
+          "type" : "string",
+          "description" : "Settore F=Forniture, S=Servizi",
+          "minLength" : 0,
+          "maxLength" : 1,
+          "enum" : [ "F", "S" ]
+        },
+        "codiceInterno" : {
+          "type" : "string",
+          "description" : "Codice interno attribuito dall'amministrazione",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione acquisto",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "anno" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Annualità di riferimento avvio procedura di affidamento (1°,2°,3° anno)",
+          "minimum" : 1,
+          "maximum" : 3
+        },
+        "esenteCup" : {
+          "type" : "string",
+          "description" : "Esente dalla richiesta CUP? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "cup" : {
+          "type" : "string",
+          "description" : "Codice CUP di progetto (assegnato da CIPE)",
+          "minLength" : 0,
+          "maxLength" : 15
+        },
+        "acquistoRicompreso" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Acquisto ricompreso nell'importo di lavoro o altra acquisizione nel programma? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=AcquistoRicompreso)"
+        },
+        "cuiCollegato" : {
+          "type" : "string",
+          "description" : "Codice CUI dell'intervento collegato",
+          "minLength" : 0,
+          "maxLength" : 25
+        },
+        "cpv" : {
+          "type" : "string",
+          "description" : "Codice CPV",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "istat" : {
+          "type" : "string",
+          "description" : "Localizzazione - Codice ISTAT del Comune",
+          "minLength" : 0,
+          "maxLength" : 9
+        },
+        "nuts" : {
+          "type" : "string",
+          "description" : "Localizzazione - NUTS",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "quantita" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Quantità"
+        },
+        "unitaMisura" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Unità di misura (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=UnitaMisura)"
+        },
+        "priorita" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)"
+        },
+        "lottoFunzionale" : {
+          "type" : "string",
+          "description" : "Lotto funzionale? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "durataInMesi" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Durata del contratto (mesi)"
+        },
+        "nuovoAffidamento" : {
+          "type" : "string",
+          "description" : "Nuovo affidamento contratto in essere? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "risorseVincolatePerLegge1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Primo anno"
+        },
+        "risorseVincolatePerLegge2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Secondo anno"
+        },
+        "risorseVincolatePerLeggeSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Annualità successive"
+        },
+        "risorseMutuo1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Primo anno"
+        },
+        "risorseMutuo2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Secondo anno"
+        },
+        "risorseMutuoSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Annualità successive"
+        },
+        "risorsePrivati1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Primo anno"
+        },
+        "risorsePrivati2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Secondo anno"
+        },
+        "risorsePrivatiSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Annualità successive"
+        },
+        "risorseBilancio1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Primo anno"
+        },
+        "risorseBilancio2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Secondo anno"
+        },
+        "risorseBilancioSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Annualità successive"
+        },
+        "risorseArt3_1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Primo anno"
+        },
+        "risorseArt3_2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Secondo anno"
+        },
+        "risorseArt3_Succ" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Annualità successive"
+        },
+        "risorseImmobili1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Primo anno"
+        },
+        "risorseImmobili2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Secondo anno"
+        },
+        "risorseImmobiliSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Annualità successive"
+        },
+        "risorseAltro1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Primo anno"
+        },
+        "risorseAltro2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Secondo anno"
+        },
+        "risorseAltroSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Annualità successive"
+        },
+        "speseSostenute" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Spese già sostenute"
+        },
+        "tipologiaCapitalePrivato" : {
+          "type" : "string",
+          "description" : "Tipologia apporto di capitale privato (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipologiaCapitalePrivato)",
+          "minLength" : 0,
+          "maxLength" : 2
+        },
+        "importoRisorseFinanziarie" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo risorse finanziarie stato/UE"
+        },
+        "importoRisorseFinanziarieRegionali" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo risorse finanziarie regionali"
+        },
+        "importoRisorseFinanziarieAltro" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo risorse finanziarie altro"
+        },
+        "meseAvvioProcedura" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Mese previsto per avvio procedura contrattuale"
+        },
+        "delega" : {
+          "type" : "string",
+          "description" : "Si intende delegare la procedura di affidamento? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "codiceSoggettoDelegato" : {
+          "type" : "string",
+          "description" : "Codice AUSA Centrale di Committenza o Soggetto Aggregatore",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "nomeSoggettoDelegato" : {
+          "type" : "string",
+          "description" : "Denominazione Centrale di Committenza o Soggetto Aggregatore",
+          "minLength" : 0,
+          "maxLength" : 160
+        },
+        "variato" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Intervento variato a seguito di modifica programma (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=VariatoAcquisti)"
+        },
+        "note" : {
+          "type" : "string",
+          "description" : "Eventuali note",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "direzioneGenerale" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Direzione generale",
+          "minLength" : 0,
+          "maxLength" : 160
+        },
+        "strutturaOperativa" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Struttura operativa",
+          "minLength" : 0,
+          "maxLength" : 160
+        },
+        "referenteDati" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Referente per i dati comunicati",
+          "minLength" : 0,
+          "maxLength" : 160
+        },
+        "dirigenteResponsabile" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Dirigente responsabile d'ufficio",
+          "minLength" : 0,
+          "maxLength" : 160
+        },
+        "proceduraAffidamento" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Procedura affidamento (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=ProceduraAffidamento)"
+        },
+        "acquistoVerdi" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Sono presenti acq. verdi art. 34 Dlgs 50/2016 (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Acquisto)"
+        },
+        "normativaRiferimento" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Normativa di riferimento",
+          "minLength" : 0,
+          "maxLength" : 200
+        },
+        "oggettoVerdi" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Oggetto verdi",
+          "minLength" : 0,
+          "maxLength" : 500
+        },
+        "cpvVerdi" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Codice CPV verdi",
+          "minLength" : 0,
+          "maxLength" : 12
+        },
+        "importoNettoIvaVerdi" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo al netto dell'IVA verdi"
+        },
+        "importoIvaVerdi" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA verdi"
+        },
+        "importoTotVerdi" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo Totale verdi"
+        },
+        "acquistoMaterialiRiciclati" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Acquisto di beni realizzati con materiali riciclati? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Acquisto)"
+        },
+        "oggettoMatRic" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Oggetto materiali riciclati",
+          "minLength" : 0,
+          "maxLength" : 500
+        },
+        "cpvMatRic" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Codice CPV materiali riciclati",
+          "minLength" : 0,
+          "maxLength" : 12
+        },
+        "importoNettoIvaMatRic" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo al netto dell'IVA materiali riciclati"
+        },
+        "importoIvaMatRic" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA materiali riciclati"
+        },
+        "importoTotMatRic" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo Totale materiali riciclati"
+        },
+        "importoIva1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA - Primo anno"
+        },
+        "importoIva2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA - Secondo anno"
+        },
+        "importoIvaSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA - Annualità successive"
+        },
+        "coperturaFinanziaria" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] L'acquisto ha copertura finanziaria? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "valutazione" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Valutazione del responsabile dl programma (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Valutazione)"
+        },
+        "rup" : {
+          "description" : "Responsabile unico RUP",
+          "$ref" : "#/definitions/DatiGeneraliTecnicoEntry"
+        },
+        "importoCapitalePrivato" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "importoTotale" : {
+          "type" : "number",
+          "format" : "double"
+        }
+      },
+      "description" : "Contenitore per i dati di un intervento"
+    },
+    "AcquistoNonRipropostoEntry" : {
+      "type" : "object",
+      "required" : [ "cui", "descrizione", "importo", "motivo", "priorita" ],
+      "properties" : {
+        "cui" : {
+          "type" : "string",
+          "description" : "Codice CUI",
+          "minLength" : 0,
+          "maxLength" : 25
+        },
+        "cup" : {
+          "type" : "string",
+          "description" : "Codice CUP di progetto (assegnato da CIPE)",
+          "minLength" : 0,
+          "maxLength" : 15
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione dell'intervento",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "importo" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Importo complessivo"
+        },
+        "priorita" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)"
+        },
+        "motivo" : {
+          "type" : "string",
+          "description" : "Motivo per il quale l'intervento non è riproposto",
+          "minLength" : 0,
+          "maxLength" : 2000
+        }
+      },
+      "description" : "Contenitore per i dati di un acquisto non riproposto"
+    },
+    "AltriDatiOperaIncompiutaEntry" : {
+      "type" : "object",
+      "properties" : {
+        "istat" : {
+          "type" : "string",
+          "description" : "Localizzazione - Codice ISTAT del Comune",
+          "minLength" : 0,
+          "maxLength" : 9
+        },
+        "nuts" : {
+          "type" : "string",
+          "description" : "Localizzazione - NUTS",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "tipologiaIntervento" : {
+          "type" : "string",
+          "description" : "Classificazione intervento: Tipologia (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipologiaIntervento)",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "categoriaIntervento" : {
+          "type" : "string",
+          "description" : "Classificazione intervento: Categoria (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=CategoriaIntervento)",
+          "minLength" : 0,
+          "maxLength" : 6
+        },
+        "requisitiCapitolato" : {
+          "type" : "string",
+          "description" : "Opera rispondente a tutti i requisiti di capitolato? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "requisitiApprovato" : {
+          "type" : "string",
+          "description" : "Opera rispondente a tutti i requisiti dell'ultimo progetto approvato? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "unitaMisura" : {
+          "type" : "string",
+          "description" : "Dimensionamento dell'opera (unita' di misura)",
+          "minLength" : 0,
+          "maxLength" : 10
+        },
+        "dimensione" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Dimensionamento dell'opera (valore)"
+        },
+        "sponsorizzazione" : {
+          "type" : "string",
+          "description" : "Sponsorizzazione (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "finanzaDiProgetto" : {
+          "type" : "string",
+          "description" : "Finanza di progetto (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "costoProgetto" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Costo progetto"
+        },
+        "finanziamento" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamento assegnato"
+        },
+        "coperturaStatale" : {
+          "type" : "string",
+          "description" : "Tipologia copertura finanziaria Statale (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "coperturaRegionale" : {
+          "type" : "string",
+          "description" : "Tipologia copertura finanziaria Regionale (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "coperturaProvinciale" : {
+          "type" : "string",
+          "description" : "Tipologia copertura finanziaria Provinciale (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "coperturaComunale" : {
+          "type" : "string",
+          "description" : "Tipologia copertura finanziaria Comunale (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "coperturaAltro" : {
+          "type" : "string",
+          "description" : "Tipologia copertura finanziaria Altra Pubblica (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "coperturaComunitaria" : {
+          "type" : "string",
+          "description" : "Tipologia copertura finanziaria Comunitaria (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "coperturaPrivata" : {
+          "type" : "string",
+          "description" : "Tipologia copertura finanziaria Privata (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        }
+      },
+      "description" : "Contenitore per gli altri dati di un'opera incompiuta"
+    },
+    "DatiGeneraliTecnicoEntry" : {
+      "type" : "object",
+      "required" : [ "cfPiva", "cognome", "nome" ],
+      "properties" : {
+        "cognome" : {
+          "type" : "string",
+          "description" : "Cognome del tecnico",
+          "minLength" : 1,
+          "maxLength" : 80
+        },
+        "nome" : {
+          "type" : "string",
+          "description" : "Nome del tecnico",
+          "minLength" : 1,
+          "maxLength" : 80
+        },
+        "indirizzo" : {
+          "type" : "string",
+          "description" : "Indirizzo (via/piazza/corso)",
+          "minLength" : 0,
+          "maxLength" : 60
+        },
+        "civico" : {
+          "type" : "string",
+          "description" : "Numero civico",
+          "minLength" : 0,
+          "maxLength" : 10
+        },
+        "provincia" : {
+          "type" : "string",
+          "description" : "Provincia di residenza (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Provincia)",
+          "minLength" : 0,
+          "maxLength" : 2
+        },
+        "cap" : {
+          "type" : "string",
+          "description" : "Codice di avviamento postale",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "luogoIstat" : {
+          "type" : "string",
+          "description" : "Codice ISTAT del Comune luogo di esecuzione del contratto",
+          "minLength" : 0,
+          "maxLength" : 9
+        },
+        "cfPiva" : {
+          "type" : "string",
+          "description" : "Codice fiscale",
+          "minLength" : 11,
+          "maxLength" : 16
+        }
+      },
+      "description" : "Contenitore per i dati generali del soggetto"
+    },
+    "DettaglioFornitureServiziResult" : {
+      "type" : "object",
+      "properties" : {
+        "error" : {
+          "type" : "string",
+          "description" : "Eventuale messaggio di errore in caso di operazione fallita"
+        },
+        "programma" : {
+          "description" : "Dettaglio del programma forniture e servizi",
+          "$ref" : "#/definitions/PubblicaProgrammaFornitureServiziEntry"
+        }
+      },
+      "description" : "Contenitore per il risultato del dettaglio di un programma forniture e servizi"
+    },
+    "DettaglioInterventoAcquistoEntry" : {
+      "type" : "object",
+      "properties" : {
+        "cui" : {
+          "type" : "string",
+          "description" : "Codice CUI"
+        },
+        "cup" : {
+          "type" : "string",
+          "description" : "Codice CUP di progetto (assegnato da CIPE)"
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione"
+        },
+        "annoProgramma" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Anno del programma"
+        },
+        "annualita" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Annualità di riferimento dell'intervento / acquisto"
+        },
+        "importoTotale" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Importo totale"
+        },
+        "rup" : {
+          "type" : "string",
+          "description" : "Responsabile unico RUP"
+        },
+        "istat" : {
+          "type" : "string",
+          "description" : "Localizzazione - Codice ISTAT del Comune"
+        },
+        "nuts" : {
+          "type" : "string",
+          "description" : "Localizzazione - NUTS"
+        },
+        "priorita" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)"
+        },
+        "risorseVincolatePerLegge1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Primo anno"
+        },
+        "risorseVincolatePerLegge2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Secondo anno"
+        },
+        "risorseVincolatePerLegge3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Terzo anno"
+        },
+        "risorseVincolatePerLeggeSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Annualità successive"
+        },
+        "risorseMutuo1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Primo anno"
+        },
+        "risorseMutuo2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Secondo anno"
+        },
+        "risorseMutuo3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Terzo anno"
+        },
+        "risorseMutuoSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Annualità successive"
+        },
+        "risorsePrivati1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Primo anno"
+        },
+        "risorsePrivati2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Secondo anno"
+        },
+        "risorsePrivati3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Terzo anno"
+        },
+        "risorsePrivatiSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Annualità successive"
+        },
+        "risorseBilancio1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Primo anno"
+        },
+        "risorseBilancio2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Secondo anno"
+        },
+        "risorseBilancio3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Terzo anno"
+        },
+        "risorseBilancioSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Annualità successive"
+        },
+        "risorseArt3_1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Primo anno"
+        },
+        "risorseArt3_2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Secondo anno"
+        },
+        "risorseArt3_3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Terzo anno"
+        },
+        "risorseArt3_Succ" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Annualità successive"
+        },
+        "risorseImmobili1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Primo anno"
+        },
+        "risorseImmobili2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Secondo anno"
+        },
+        "risorseImmobili3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Terzo anno"
+        },
+        "risorseImmobiliSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Annualità successive"
+        },
+        "risorseAltro1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Primo anno"
+        },
+        "risorseAltro2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Secondo anno"
+        },
+        "risorseAltro3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Terzo anno"
+        },
+        "risorseAltroSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Annualità successive"
+        }
+      },
+      "description" : "Contenitore per i dati di un intervento / acquisto"
+    },
+    "DettaglioInterventoAcquistoResult" : {
+      "type" : "object",
+      "properties" : {
+        "error" : {
+          "type" : "string",
+          "description" : "Eventuale messaggio di errore in caso di operazione fallita"
+        },
+        "interventoAcquisto" : {
+          "description" : "Dettaglio dell'intervento / acquisto",
+          "$ref" : "#/definitions/DettaglioInterventoAcquistoEntry"
+        }
+      },
+      "description" : "Contenitore per il risultato del dettaglio di un intervento / acquisto"
+    },
+    "DettaglioLavoriResult" : {
+      "type" : "object",
+      "properties" : {
+        "error" : {
+          "type" : "string",
+          "description" : "Eventuale messaggio di errore in caso di operazione fallita"
+        },
+        "programma" : {
+          "description" : "Dettaglio del programma lavori",
+          "$ref" : "#/definitions/PubblicaProgrammaLavoriEntry"
+        }
+      },
+      "description" : "Contenitore per il risultato del dettaglio di un programma lavori"
+    },
+    "EsitoResult" : {
+      "type" : "object",
+      "properties" : {
+        "esito" : {
+          "type" : "boolean",
+          "description" : "Risutato dell'operazione"
+        },
+        "messaggio" : {
+          "type" : "string",
+          "description" : "Eventuale messaggio di errore in caso di operazione fallita"
+        }
+      },
+      "description" : "Contenitore per il risultato di una operazione"
+    },
+    "FornitureServiziDM112011Entry" : {
+      "type" : "object",
+      "required" : [ "descrizione", "settore" ],
+      "properties" : {
+        "codiceInterno" : {
+          "type" : "string",
+          "description" : "Codice interno attribuito dall'amministrazione",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione intervento",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "istat" : {
+          "type" : "string",
+          "description" : "Localizzazione - Codice ISTAT del Comune",
+          "minLength" : 0,
+          "maxLength" : 9
+        },
+        "nuts" : {
+          "type" : "string",
+          "description" : "Localizzazione - NUTS",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "esenteCup" : {
+          "type" : "string",
+          "description" : "Esente dalla richiesta CUP? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "cup" : {
+          "type" : "string",
+          "description" : "Codice CUP di progetto (assegnato da CIPE)",
+          "minLength" : 0,
+          "maxLength" : 15
+        },
+        "cpv" : {
+          "type" : "string",
+          "description" : "Codice CPV",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "settore" : {
+          "type" : "string",
+          "description" : "Settore F=Forniture, S=Servizi",
+          "minLength" : 0,
+          "maxLength" : 1,
+          "enum" : [ "F", "S" ]
+        },
+        "priorita" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)"
+        },
+        "normativaRiferimento" : {
+          "type" : "string",
+          "description" : "Normativa di riferimento",
+          "minLength" : 0,
+          "maxLength" : 200
+        },
+        "strumentoProgrammazione" : {
+          "type" : "string",
+          "description" : "Eventuale strumento di programma",
+          "minLength" : 0,
+          "maxLength" : 100
+        },
+        "previstaManodopera" : {
+          "type" : "string",
+          "description" : "E' previsto impiego di manodopera/posa in opera? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "risorseMutuo" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante contrazioni di mutuo"
+        },
+        "risorsePrivati" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitali privati"
+        },
+        "risorseBilancio" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio"
+        },
+        "risorseAltro" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altre risorse disponibili"
+        },
+        "importoRisorseFinanziarie" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo risorse finanziarie stato/UE"
+        },
+        "importoRisorseFinanziarieRegionali" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo risorse finanziarie regionali"
+        },
+        "meseAvvioProcedura" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Mese previsto per avvio procedura contrattuale"
+        },
+        "rup" : {
+          "description" : "Responsabile unico RUP",
+          "$ref" : "#/definitions/DatiGeneraliTecnicoEntry"
+        }
+      },
+      "description" : "Contenitore per i dati di un intervento per forniture e servizi per Programma DM 11/2011"
+    },
+    "ImmobileDM112011Entry" : {
+      "type" : "object",
+      "properties" : {
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione dell'immobile",
+          "minLength" : 0,
+          "maxLength" : 400
+        },
+        "tipoProprieta" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Tipo proprietà (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipoProprieta)"
+        },
+        "valoreStimato" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Valore stimato dell'immobile"
+        }
+      },
+      "description" : "Contenitore per dati di un immobile"
+    },
+    "ImmobileEntry" : {
+      "type" : "object",
+      "required" : [ "cui" ],
+      "properties" : {
+        "cui" : {
+          "type" : "string",
+          "description" : "Codice univoco immobile (‘I’ + CodiceFiscale Stazione Appaltante(11 char) + anno (4 char) + progressivo (5 char))",
+          "minLength" : 0,
+          "maxLength" : 30
+        },
+        "istat" : {
+          "type" : "string",
+          "description" : "Localizzazione - Codice ISTAT del Comune",
+          "minLength" : 0,
+          "maxLength" : 9
+        },
+        "nuts" : {
+          "type" : "string",
+          "description" : "Localizzazione - NUTS",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "trasferimentoTitoloCorrispettivo" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Trasferimento immobile a titolo corrispettivo (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TrasferimentoImmobile)"
+        },
+        "immobileDisponibile" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Immobile disponibile art. 21-c5 (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=ImmobileDisponibile)"
+        },
+        "alienati" : {
+          "type" : "string",
+          "description" : "[Attributo non utilizzato] Alienati per il finanziamento e la realizzazione di opere pubbliche (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "inclusoProgrammaDismissione" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Già incluso in programma di dismissione art. 27 DL 201/2011 (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=ProgrammaDismissione)"
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione dell'immobile",
+          "minLength" : 0,
+          "maxLength" : 400
+        },
+        "tipoDisponibilita" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Tipo proprietà (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipoDisponibilita)"
+        },
+        "valoreStimato1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Valore stimato dell'immobile - Primo anno"
+        },
+        "valoreStimato2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Valore stimato dell'immobile - Secondo anno"
+        },
+        "valoreStimato3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Valore stimato dell'immobile - Terzo anno"
+        },
+        "valoreStimatoSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Valore stimato dell'immobile - Annualità successive"
+        }
+      },
+      "description" : "Contenitore per dati di un'immobile"
+    },
+    "InputStream" : {
+      "type" : "object"
+    },
+    "InterventiAcquistiResult" : {
+      "type" : "object",
+      "properties" : {
+        "interventiAcquisti" : {
+          "type" : "array",
+          "description" : "Elenco Interventi/Acquisti",
+          "items" : {
+            "$ref" : "#/definitions/InterventoAcquistoEntry"
+          }
+        },
+        "error" : {
+          "type" : "string",
+          "description" : "Eventuale messaggio di errore in caso di operazione fallita"
+        }
+      },
+      "description" : "Contenitore per l'elenco degli interventi acquisti"
+    },
+    "InterventoAcquistoEntry" : {
+      "type" : "object",
+      "properties" : {
+        "anno" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Anno iniziale del programma"
+        },
+        "annualitaRiferimento" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Annualità di riferimento dell'intervento/acquisto nel programma [1,2,3]"
+        },
+        "cui" : {
+          "type" : "string",
+          "description" : "Codice CUI"
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione dell'intervento/acquisto"
+        },
+        "codiceFiscaleRUP" : {
+          "type" : "string",
+          "description" : "Codice Fiscale del RUP"
+        },
+        "nomeRUP" : {
+          "type" : "string",
+          "description" : "Nome del RUP"
+        },
+        "cognomeRUP" : {
+          "type" : "string",
+          "description" : "Cognome del RUP "
+        },
+        "codiceLavoro" : {
+          "type" : "string",
+          "description" : "Codice Lavoro"
+        },
+        "cup" : {
+          "type" : "string",
+          "description" : "Codice CUP"
+        },
+        "cpv" : {
+          "type" : "string",
+          "description" : "Codice CPV"
+        }
+      },
+      "description" : "Contenitore per i dati di un intervento / acquisto"
+    },
+    "InterventoDM112011Entry" : {
+      "type" : "object",
+      "required" : [ "annualitaRiferimento", "descrizione", "numeroProgressivo" ],
+      "properties" : {
+        "numeroProgressivo" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Numero progressivo intervento"
+        },
+        "codiceInterno" : {
+          "type" : "string",
+          "description" : "Codice interno attribuito dall'amministrazione",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione intervento",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "annualitaRiferimento" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Annualità di riferimento dell'intervento (1°,2°,3° anno)",
+          "minimum" : 1,
+          "maximum" : 3
+        },
+        "tipologia" : {
+          "type" : "string",
+          "description" : "Classificazione intervento: Tipologia (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipologiaInterventoDM112011)",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "categoria" : {
+          "type" : "string",
+          "description" : "Classificazione intervento: Categoria (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=CategoriaInterventoDM112011)",
+          "minLength" : 0,
+          "maxLength" : 6
+        },
+        "subCategoria" : {
+          "type" : "string",
+          "description" : "Subcategoria intervento",
+          "minLength" : 0,
+          "maxLength" : 2
+        },
+        "istat" : {
+          "type" : "string",
+          "description" : "Localizzazione - Codice ISTAT del Comune",
+          "minLength" : 0,
+          "maxLength" : 9
+        },
+        "nuts" : {
+          "type" : "string",
+          "description" : "Localizzazione - NUTS",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "esenteCup" : {
+          "type" : "string",
+          "description" : "Esente dalla richiesta CUP? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "cup" : {
+          "type" : "string",
+          "description" : "Codice CUP di progetto (assegnato da CIPE)",
+          "minLength" : 0,
+          "maxLength" : 15
+        },
+        "cpv" : {
+          "type" : "string",
+          "description" : "Codice CPV",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "annuale" : {
+          "type" : "string",
+          "description" : "L'intervento è stato inserito nel Piano annuale? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "finalita" : {
+          "type" : "string",
+          "description" : "Finalità dell'intervento (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=FinalitaDM112011)",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "priorita" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)"
+        },
+        "conformitaUrbanistica" : {
+          "type" : "string",
+          "description" : "Svolta verifica conformità urbanistica? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "conformitaAmbientale" : {
+          "type" : "string",
+          "description" : "Svolta verifica conformità vincoli ambientali? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "statoProgettazione" : {
+          "type" : "string",
+          "description" : "Stato Progettazione approvata (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=StatoProgettazioneDM112011)",
+          "minLength" : 0,
+          "maxLength" : 2
+        },
+        "annoInizioLavori" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Tempi di esecuzione - Anno inizio lavori"
+        },
+        "trimestreInizioLavori" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Tempi di esecuzione - Trimestre inizio lavori",
+          "minimum" : 1,
+          "maximum" : 4
+        },
+        "annoFineLavori" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Tempi di esecuzione - Anno fine lavori"
+        },
+        "trimestreFineLavori" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Tempi di esecuzione - Trimestre fine lavori",
+          "minimum" : 1,
+          "maximum" : 4
+        },
+        "risorseVincolatePerLegge1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Primo anno"
+        },
+        "risorseVincolatePerLegge2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Secondo anno"
+        },
+        "risorseVincolatePerLegge3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Terzo anno"
+        },
+        "risorseMutuo1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Primo anno"
+        },
+        "risorseMutuo2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Secondo anno"
+        },
+        "risorseMutuo3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Terzo anno"
+        },
+        "risorseImmobili1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Primo anno"
+        },
+        "risorseImmobili2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Secondo anno"
+        },
+        "risorseImmobili3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Terzo anno"
+        },
+        "risorseBilancio1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Primo anno"
+        },
+        "risorseBilancio2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Secondo anno"
+        },
+        "risorseBilancio3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Terzo anno"
+        },
+        "risorseAltro1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Primo anno"
+        },
+        "risorseAltro2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Secondo anno"
+        },
+        "risorseAltro3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Terzo anno"
+        },
+        "risorsePrivati1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Primo anno"
+        },
+        "risorsePrivati2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Secondo anno"
+        },
+        "risorsePrivati3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Terzo anno"
+        },
+        "tipologiaCapitalePrivato" : {
+          "type" : "string",
+          "description" : "Lotto funzionale? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipologiaCapitalePrivatoDM112011)",
+          "minLength" : 0,
+          "maxLength" : 2
+        },
+        "rup" : {
+          "description" : "Responsabile unico RUP",
+          "$ref" : "#/definitions/DatiGeneraliTecnicoEntry"
+        },
+        "immobili" : {
+          "type" : "array",
+          "description" : "Immobili da trasferire",
+          "items" : {
+            "$ref" : "#/definitions/ImmobileDM112011Entry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        }
+      },
+      "description" : "Contenitore per i dati di un intervento per lavori per Programma DM 11/2011"
+    },
+    "InterventoEntry" : {
+      "type" : "object",
+      "required" : [ "anno", "cui", "descrizione" ],
+      "properties" : {
+        "numeroProgressivo" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Deprecato] Numero progressivo intervento"
+        },
+        "cui" : {
+          "type" : "string",
+          "description" : "Numero intervento CUI (‘L’ + CodiceFiscale Stazione Appaltante(11 char) + anno (4 char) + progressivo (5 char))",
+          "minLength" : 0,
+          "maxLength" : 25
+        },
+        "codiceInterno" : {
+          "type" : "string",
+          "description" : "Codice interno attribuito dall'amministrazione",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione intervento",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "anno" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Annualità di riferimento avvio procedura di affidamento(1°,2°,3° anno)",
+          "minimum" : 1,
+          "maximum" : 3
+        },
+        "esenteCup" : {
+          "type" : "string",
+          "description" : "Esente dalla richiesta CUP? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "cup" : {
+          "type" : "string",
+          "description" : "Codice CUP di progetto (assegnato da CIPE)",
+          "minLength" : 0,
+          "maxLength" : 15
+        },
+        "cpv" : {
+          "type" : "string",
+          "description" : "Codice CPV",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "istat" : {
+          "type" : "string",
+          "description" : "Localizzazione - Codice ISTAT del Comune",
+          "minLength" : 0,
+          "maxLength" : 9
+        },
+        "nuts" : {
+          "type" : "string",
+          "description" : "Localizzazione - NUTS",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "priorita" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)"
+        },
+        "lottoFunzionale" : {
+          "type" : "string",
+          "description" : "Lotto funzionale? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "lavoroComplesso" : {
+          "type" : "string",
+          "description" : "Lavoro complesso? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "tipologia" : {
+          "type" : "string",
+          "description" : "Classificazione intervento: Tipologia (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipologiaIntervento)",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "categoria" : {
+          "type" : "string",
+          "description" : "Classificazione intervento: Categoria (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=CategoriaIntervento)",
+          "minLength" : 0,
+          "maxLength" : 6
+        },
+        "scadenzaFinanziamento" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Scadenza finanziamento da mutuo"
+        },
+        "finalita" : {
+          "type" : "string",
+          "description" : "Finalità dell'intervento (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Finalita)",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "conformitaUrbanistica" : {
+          "type" : "string",
+          "description" : "Svolta verifica conformità urbanistica? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "conformitaAmbientale" : {
+          "type" : "string",
+          "description" : "Svolta verifica conformità vincoli ambientali? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "statoProgettazione" : {
+          "type" : "string",
+          "description" : "Stato Progettazione approvata (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=StatoProgettazione)",
+          "minLength" : 0,
+          "maxLength" : 2
+        },
+        "risorseVincolatePerLegge1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Primo anno"
+        },
+        "risorseVincolatePerLegge2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Secondo anno"
+        },
+        "risorseVincolatePerLegge3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Terzo anno"
+        },
+        "risorseVincolatePerLeggeSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate aventi destinazione vincolata per legge - Annualità successive"
+        },
+        "risorseMutuo1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Primo anno"
+        },
+        "risorseMutuo2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Secondo anno"
+        },
+        "risorseMutuo3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Terzo anno"
+        },
+        "risorseMutuoSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Annualità successive"
+        },
+        "risorsePrivati1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Primo anno"
+        },
+        "risorsePrivati2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Secondo anno"
+        },
+        "risorsePrivati3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Terzo anno"
+        },
+        "risorsePrivatiSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse acquisite mediante apporti di capitale privato - Annualità successive"
+        },
+        "risorseBilancio1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Primo anno"
+        },
+        "risorseBilancio2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Secondo anno"
+        },
+        "risorseBilancio3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Terzo anno"
+        },
+        "risorseBilancioSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stanziamenti di bilancio - Annualità successive"
+        },
+        "risorseArt3_1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Primo anno"
+        },
+        "risorseArt3_2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Secondo anno"
+        },
+        "risorseArt3_3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Terzo anno"
+        },
+        "risorseArt3_Succ" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Finanziamenti art. 3 DL 310/1990 - Annualità successive"
+        },
+        "risorseImmobili1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Primo anno"
+        },
+        "risorseImmobili2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Secondo anno"
+        },
+        "risorseImmobili3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Terzo anno"
+        },
+        "risorseImmobiliSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Risorse derivanti da trasferimento immobili - Annualità successive"
+        },
+        "risorseAltro1" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Primo anno"
+        },
+        "risorseAltro2" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Secondo anno"
+        },
+        "risorseAltro3" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Terzo anno"
+        },
+        "risorseAltroSucc" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Altra tipologia - Annualità successive"
+        },
+        "speseSostenute" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Spese già sostenute"
+        },
+        "tipologiaCapitalePrivato" : {
+          "type" : "string",
+          "description" : "Tipologia apporto di capitale privato (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipologiaCapitalePrivato)",
+          "minLength" : 0,
+          "maxLength" : 2
+        },
+        "meseAvvioProcedura" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Mese previsto per avvio procedura contrattuale"
+        },
+        "delega" : {
+          "type" : "string",
+          "description" : "Si intende delegare la procedura di affidamento? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "codiceSoggettoDelegato" : {
+          "type" : "string",
+          "description" : "Codice AUSA del Soggetto delegato",
+          "minLength" : 0,
+          "maxLength" : 20
+        },
+        "nomeSoggettoDelegato" : {
+          "type" : "string",
+          "description" : "Denominazione del Soggetto delegato",
+          "minLength" : 0,
+          "maxLength" : 160
+        },
+        "variato" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Intervento variato a seguito di modifica programma (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=VariatoInterventi)"
+        },
+        "note" : {
+          "type" : "string",
+          "description" : "Eventuali note",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "direzioneGenerale" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Direzione generale",
+          "minLength" : 0,
+          "maxLength" : 160
+        },
+        "strutturaOperativa" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Struttura operativa",
+          "minLength" : 0,
+          "maxLength" : 160
+        },
+        "referenteDati" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Referente per i dati comunicati",
+          "minLength" : 0,
+          "maxLength" : 160
+        },
+        "dirigenteResponsabile" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Dirigente responsabile d'ufficio",
+          "minLength" : 0,
+          "maxLength" : 160
+        },
+        "proceduraAffidamento" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Procedura affidamento (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=ProceduraAffidamento)"
+        },
+        "acquistoVerdi" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Sono presenti acq. verdi art. 34 Dlgs 50/2016 (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Acquisto)"
+        },
+        "normativaRiferimento" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Normativa di riferimento",
+          "minLength" : 0,
+          "maxLength" : 200
+        },
+        "oggettoVerdi" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Oggetto verdi",
+          "minLength" : 0,
+          "maxLength" : 500
+        },
+        "cpvVerdi" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Codice CPV verdi",
+          "minLength" : 0,
+          "maxLength" : 12
+        },
+        "importoNettoIvaVerdi" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo al netto dell'IVA verdi"
+        },
+        "importoIvaVerdi" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA verdi"
+        },
+        "importoTotVerdi" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo Totale verdi"
+        },
+        "acquistoMaterialiRiciclati" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Acquisto di beni realizzati con materiali riciclati? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Acquisto)"
+        },
+        "oggettoMatRic" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Oggetto materiali riciclati",
+          "minLength" : 0,
+          "maxLength" : 500
+        },
+        "cpvMatRic" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Codice CPV materiali riciclati",
+          "minLength" : 0,
+          "maxLength" : 12
+        },
+        "importoNettoIvaMatRic" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo al netto dell'IVA materiali riciclati"
+        },
+        "importoIvaMatRic" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA materiali riciclati"
+        },
+        "importoTotMatRic" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Importo Totale materiali riciclati"
+        },
+        "coperturaFinanziaria" : {
+          "type" : "string",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] L'acquisto ha copertura finanziaria? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "valutazione" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "[Attributo aggiuntivo, previsto in ambiti regionali] Valutazione del responsabile dl programma (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Valutazione)"
+        },
+        "rup" : {
+          "description" : "Responsabile unico RUP",
+          "$ref" : "#/definitions/DatiGeneraliTecnicoEntry"
+        },
+        "immobili" : {
+          "type" : "array",
+          "description" : "Immobili da trasferire",
+          "items" : {
+            "$ref" : "#/definitions/ImmobileEntry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        },
+        "importoCapitalePrivato" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "importoTotale" : {
+          "type" : "number",
+          "format" : "double"
+        }
+      },
+      "description" : "Contenitore per i dati di un intervento"
+    },
+    "InterventoNonRipropostoEntry" : {
+      "type" : "object",
+      "required" : [ "cui", "descrizione", "importo", "motivo", "priorita" ],
+      "properties" : {
+        "cui" : {
+          "type" : "string",
+          "description" : "Codice CUI",
+          "minLength" : 0,
+          "maxLength" : 25
+        },
+        "cup" : {
+          "type" : "string",
+          "description" : "Codice CUP di progetto (assegnato da CIPE)",
+          "minLength" : 0,
+          "maxLength" : 15
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione dell'intervento",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "importo" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Importo complessivo"
+        },
+        "priorita" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)"
+        },
+        "motivo" : {
+          "type" : "string",
+          "description" : "Motivo per il quale l'intervento non è riproposto",
+          "minLength" : 0,
+          "maxLength" : 2000
+        }
+      },
+      "description" : "Contenitore per i dati di un intervento non riproposto"
+    },
+    "LavoroEconomiaEntry" : {
+      "type" : "object",
+      "properties" : {
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "cup" : {
+          "type" : "string",
+          "description" : "Codice CUP",
+          "minLength" : 0,
+          "maxLength" : 15
+        },
+        "stimaLavori" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Stima lavori"
+        }
+      },
+      "description" : "Contenitore per dati di un lavoro in ecomomia"
+    },
+    "OperaIncompiutaEntry" : {
+      "type" : "object",
+      "required" : [ "cup", "descrizione" ],
+      "properties" : {
+        "cup" : {
+          "type" : "string",
+          "description" : "Codice CUP",
+          "minLength" : 0,
+          "maxLength" : 15
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione opera",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "determinazioneAmministrazione" : {
+          "type" : "string",
+          "description" : "Determinazioni dell'amministrazione (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Determinazioni)",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "ambito" : {
+          "type" : "string",
+          "description" : "Ambito di interesse dell'opera (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Ambito)",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "anno" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Anno ultimo q.e. approvato"
+        },
+        "importoIntervento" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Importo complessivo dell'intervento"
+        },
+        "importoLavori" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Importo complessivo lavori"
+        },
+        "oneri" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Oneri necessari per l'ultimazione dei lavori"
+        },
+        "importoAvanzamento" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Importo ultimo SAL"
+        },
+        "percentualeAvanzamento" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Percentuale avanzamento lavori %"
+        },
+        "causa" : {
+          "type" : "string",
+          "description" : "Causa per la quale l'opera è incompiuta (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Causa)",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "stato" : {
+          "type" : "string",
+          "description" : "Stato di realizzazione (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=StatoRealizzazione)",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "infrastruttura" : {
+          "type" : "string",
+          "description" : "Parte di infrastruttura di rete? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "discontinuitaRete" : {
+          "type" : "string",
+          "description" : "Crea discontinuità nella rete? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "fruibile" : {
+          "type" : "string",
+          "description" : "Opera fruibile parzialmente? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "ridimensionato" : {
+          "type" : "string",
+          "description" : "Utilizzo ridimensionato? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "destinazioneUso" : {
+          "type" : "string",
+          "description" : "Destinazione d'uso (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=DestinazioneUso)",
+          "minLength" : 0,
+          "maxLength" : 5
+        },
+        "cessione" : {
+          "type" : "string",
+          "description" : "Cessione per realizzazione di altra opera? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "previstaVendita" : {
+          "type" : "string",
+          "description" : "Prevista la vendita? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "demolizione" : {
+          "type" : "string",
+          "description" : "Opera da demolire? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)",
+          "minLength" : 0,
+          "maxLength" : 1
+        },
+        "oneriSito" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Oneri Sito"
+        },
+        "altriDati" : {
+          "description" : "Altri dati",
+          "$ref" : "#/definitions/AltriDatiOperaIncompiutaEntry"
+        },
+        "immobili" : {
+          "type" : "array",
+          "description" : "Immobili da trasferire",
+          "items" : {
+            "$ref" : "#/definitions/ImmobileEntry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        }
+      },
+      "description" : "Contenitore per i dati di un'opera incompiuta"
+    },
+    "PubblicaProgrammaDM112011Entry" : {
+      "type" : "object",
+      "required" : [ "anno", "codiceFiscaleSA", "descrizione", "id", "referente" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "ID del programma",
+          "minLength" : 20,
+          "maxLength" : 25
+        },
+        "codiceFiscaleSA" : {
+          "type" : "string",
+          "description" : "Codice Fiscale Stazione appaltante",
+          "minLength" : 11,
+          "maxLength" : 16
+        },
+        "ufficio" : {
+          "type" : "string",
+          "description" : "Ufficio/area di pertinenza",
+          "minLength" : 0,
+          "maxLength" : 250
+        },
+        "anno" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Anno di inizio del programma"
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione del Programma",
+          "minLength" : 1,
+          "maxLength" : 500
+        },
+        "numeroApprovazione" : {
+          "type" : "string",
+          "description" : "Numero approvazione",
+          "minLength" : 0,
+          "maxLength" : 50
+        },
+        "dataApprovazione" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data approvazione"
+        },
+        "dataPubblicazioneApprovazione" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data pubblicazione approvazione"
+        },
+        "titoloAttoApprovazione" : {
+          "type" : "string",
+          "description" : "Titolo atto approvazione",
+          "minLength" : 0,
+          "maxLength" : 250
+        },
+        "urlAttoApprovazione" : {
+          "type" : "string",
+          "description" : "Url atto di approvazione",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "numeroAdozione" : {
+          "type" : "string",
+          "description" : "Numero adozione",
+          "minLength" : 0,
+          "maxLength" : 50
+        },
+        "dataAdozione" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data adozione"
+        },
+        "dataPubblicazioneAdozione" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data pubblicazione adozione"
+        },
+        "titoloAttoAdozione" : {
+          "type" : "string",
+          "description" : "Titolo atto adozione",
+          "minLength" : 0,
+          "maxLength" : 250
+        },
+        "urlAttoAdozione" : {
+          "type" : "string",
+          "description" : "Url atto di adozione",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "note1" : {
+          "type" : "string",
+          "description" : "Note programma triennale",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "note2" : {
+          "type" : "string",
+          "description" : "Note scheda 2",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "note2b" : {
+          "type" : "string",
+          "description" : "Note Scheda 2/B",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "note3" : {
+          "type" : "string",
+          "description" : "Note scheda 3 Elenco annuale",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "note4" : {
+          "type" : "string",
+          "description" : "Note scheda 4",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "accantonamento" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Accantonamento primo anno (art. 12 c. 1 dpr 207/2010)"
+        },
+        "referente" : {
+          "description" : "Referente del programma",
+          "$ref" : "#/definitions/DatiGeneraliTecnicoEntry"
+        },
+        "interventi" : {
+          "type" : "array",
+          "description" : "Lista interventi lavori",
+          "items" : {
+            "$ref" : "#/definitions/InterventoDM112011Entry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        },
+        "fornitureEServizi" : {
+          "type" : "array",
+          "description" : "Lista interventi forniture e servizi",
+          "items" : {
+            "$ref" : "#/definitions/FornitureServiziDM112011Entry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        },
+        "lavoriEconomia" : {
+          "type" : "array",
+          "description" : "Elenco lavori in economia",
+          "items" : {
+            "$ref" : "#/definitions/LavoroEconomiaEntry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        },
+        "idRicevuto" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Id univoco generato dal sistema remoto; deve essere utilizzato per le chiamate successive"
+        }
+      },
+      "description" : "Contenitore per i dati di pubblicazione di un programma DM 11/2011"
+    },
+    "PubblicaProgrammaFornitureServiziEntry" : {
+      "type" : "object",
+      "required" : [ "anno", "codiceFiscaleSA", "descrizione", "id", "referente" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "ID del programma ('FS' + CodiceFiscaleSA(11 caratteri) + anno(4 cifre) + progressivo(3 cifre))",
+          "minLength" : 20,
+          "maxLength" : 25
+        },
+        "codiceFiscaleSA" : {
+          "type" : "string",
+          "description" : "Codice Fiscale Stazione appaltante",
+          "minLength" : 11,
+          "maxLength" : 16
+        },
+        "ufficio" : {
+          "type" : "string",
+          "description" : "Ufficio/area di pertinenza",
+          "minLength" : 0,
+          "maxLength" : 250
+        },
+        "anno" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Anno di inizio del programma"
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione del Programma",
+          "minLength" : 1,
+          "maxLength" : 500
+        },
+        "numeroApprovazione" : {
+          "type" : "string",
+          "description" : "Numero approvazione",
+          "minLength" : 0,
+          "maxLength" : 50
+        },
+        "dataApprovazione" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data approvazione"
+        },
+        "dataPubblicazioneApprovazione" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data pubblicazione approvazione"
+        },
+        "titoloAttoApprovazione" : {
+          "type" : "string",
+          "description" : "Titolo atto approvazione",
+          "minLength" : 0,
+          "maxLength" : 250
+        },
+        "urlAttoApprovazione" : {
+          "type" : "string",
+          "description" : "Url atto di approvazione",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "primaPubblicazioneSCP" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data pubblicazione programma su sito SCP (valorizzato solo nel metodo /Programmi/DettaglioFornitureServizi)"
+        },
+        "ultimaModificaSCP" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Utima modifica pubblicazione programma su sito SCP (valorizzato solo nel metodo /Programmi/DettaglioFornitureServizi)"
+        },
+        "referente" : {
+          "description" : "Referente del programma",
+          "$ref" : "#/definitions/DatiGeneraliTecnicoEntry"
+        },
+        "acquisti" : {
+          "type" : "array",
+          "description" : "Lista acquisti",
+          "items" : {
+            "$ref" : "#/definitions/AcquistoEntry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        },
+        "acquistiNonRiproposti" : {
+          "type" : "array",
+          "description" : "Lista acquisti non riproposti",
+          "items" : {
+            "$ref" : "#/definitions/AcquistoNonRipropostoEntry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        },
+        "idRicevuto" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Id univoco generato dal sistema remoto; deve essere utilizzato per le chiamate successive"
+        }
+      },
+      "description" : "Contenitore per i dati di pubblicazione di un programma di forniture e servizi"
+    },
+    "PubblicaProgrammaLavoriEntry" : {
+      "type" : "object",
+      "required" : [ "anno", "codiceFiscaleSA", "descrizione", "id", "referente" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "ID del programma('LP' + CodiceFiscaleSA(11 caratteri) + anno(4 cifre) + progressivo(3 cifre))",
+          "minLength" : 20,
+          "maxLength" : 25
+        },
+        "codiceFiscaleSA" : {
+          "type" : "string",
+          "description" : "Codice Fiscale Stazione appaltante",
+          "minLength" : 11,
+          "maxLength" : 16
+        },
+        "ufficio" : {
+          "type" : "string",
+          "description" : "Ufficio/area di pertinenza",
+          "minLength" : 0,
+          "maxLength" : 250
+        },
+        "anno" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Anno di inizio del programma"
+        },
+        "descrizione" : {
+          "type" : "string",
+          "description" : "Descrizione del Programma",
+          "minLength" : 1,
+          "maxLength" : 500
+        },
+        "numeroApprovazione" : {
+          "type" : "string",
+          "description" : "Numero approvazione",
+          "minLength" : 0,
+          "maxLength" : 50
+        },
+        "dataApprovazione" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data approvazione"
+        },
+        "dataPubblicazioneApprovazione" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data pubblicazione approvazione"
+        },
+        "titoloAttoApprovazione" : {
+          "type" : "string",
+          "description" : "Titolo atto approvazione",
+          "minLength" : 0,
+          "maxLength" : 250
+        },
+        "urlAttoApprovazione" : {
+          "type" : "string",
+          "description" : "Url atto di approvazione",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "numeroAdozione" : {
+          "type" : "string",
+          "description" : "Numero adozione",
+          "minLength" : 0,
+          "maxLength" : 50
+        },
+        "dataAdozione" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data adozione"
+        },
+        "dataPubblicazioneAdozione" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data pubblicazione adozione"
+        },
+        "titoloAttoAdozione" : {
+          "type" : "string",
+          "description" : "Titolo atto adozione",
+          "minLength" : 0,
+          "maxLength" : 250
+        },
+        "urlAttoAdozione" : {
+          "type" : "string",
+          "description" : "Url atto di adozione",
+          "minLength" : 0,
+          "maxLength" : 2000
+        },
+        "primaPubblicazioneSCP" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Data pubblicazione programma su sito SCP (valorizzato solo nel metodo /Programmi/DettaglioLavori)"
+        },
+        "ultimaModificaSCP" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Utima modifica pubblicazione programma su sito SCP (valorizzato solo nel metodo /Programmi/DettaglioLavori)"
+        },
+        "referente" : {
+          "description" : "Referente del programma",
+          "$ref" : "#/definitions/DatiGeneraliTecnicoEntry"
+        },
+        "opereIncompiute" : {
+          "type" : "array",
+          "description" : "Lista opere incompiute",
+          "items" : {
+            "$ref" : "#/definitions/OperaIncompiutaEntry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        },
+        "interventi" : {
+          "type" : "array",
+          "description" : "Lista interventi",
+          "items" : {
+            "$ref" : "#/definitions/InterventoEntry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        },
+        "interventiNonRiproposti" : {
+          "type" : "array",
+          "description" : "Lista interventi non riproposti",
+          "items" : {
+            "$ref" : "#/definitions/InterventoNonRipropostoEntry"
+          },
+          "maxItems" : 2147483647,
+          "minItems" : 0
+        },
+        "idRicevuto" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Id univoco generato dal sistema remoto; deve essere utilizzato per le chiamate successive"
+        }
+      },
+      "description" : "Contenitore per i dati di pubblicazione di un programma per lavori"
+    },
+    "PubblicazioneResult" : {
+      "type" : "object",
+      "properties" : {
+        "error" : {
+          "type" : "string",
+          "description" : "Eventuale messaggio di errore in caso di operazione fallita"
+        },
+        "validate" : {
+          "type" : "array",
+          "description" : "Eventuale lista dei controlli di validazione che hanno generato errore",
+          "items" : {
+            "$ref" : "#/definitions/ValidateEntry"
+          }
+        },
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Id univoco generato dal sistema, deve essere utilizzato per le chiamate successive"
+        }
+      },
+      "description" : "Risultato della pubblicazione"
+    },
+    "ValidateEntry" : {
+      "type" : "object",
+      "properties" : {
+        "nome" : {
+          "type" : "string",
+          "description" : "Nome campo validato"
+        },
+        "messaggio" : {
+          "type" : "string",
+          "description" : "Messaggio"
+        },
+        "tipo" : {
+          "type" : "string",
+          "description" : "Tipo di messaggio, 'E' = errore bloccante, 'W' = avviso"
+        }
+      },
+      "description" : "Errore di validazione"
+    }
+  }
+}
