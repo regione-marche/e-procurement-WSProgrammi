@@ -88,7 +88,7 @@ public class PubblicaProgrammaDM112011Entry implements Serializable {
 	@Size(max=16, min=11)
 	private String codiceFiscaleSA;
 
-	@ApiModelProperty(value = "Codice Unità Organizzativa")
+	@ApiModelProperty(value = "Codice Unita' Organizzativa")
 	@Size(max=20)
 	private String codiceUnitaOrganizzativa;
 	  

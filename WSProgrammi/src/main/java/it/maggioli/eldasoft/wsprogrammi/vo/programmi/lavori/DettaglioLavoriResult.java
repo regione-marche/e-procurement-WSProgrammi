@@ -39,7 +39,7 @@ public class DettaglioLavoriResult implements Serializable {
 	 */
 	private static final long serialVersionUID = -6611269573839884401L;
 
-	public static final String ERROR_VALIDATION = "Il programma richiesto non è un programma di Lavori";
+	public static final String ERROR_VALIDATION = "Il programma richiesto non e' un programma di Lavori";
 	public static final String ERROR_NOT_FOUND = "Identificativo programma non trovato nella banca dati";
 	public static final String ERROR_UNAUTHORIZED = "Non si possiedono le credenziali per questo programma";
 	public static final String ERROR_UNEXPECTED = "Errore inaspettato";

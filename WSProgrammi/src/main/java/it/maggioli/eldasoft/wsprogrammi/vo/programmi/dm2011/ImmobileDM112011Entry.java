@@ -51,7 +51,7 @@ public class ImmobileDM112011Entry implements Serializable {
 	@Size(max=400)
 	private String descrizione;
 	
-	@ApiModelProperty(value="Tipo proprietà (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipoProprieta)")
+	@ApiModelProperty(value="Tipo proprieta' (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipoProprieta)")
 	private Long tipoProprieta;
 
 	@ApiModelProperty(value="Valore stimato dell'immobile")

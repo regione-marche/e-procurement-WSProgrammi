@@ -60,10 +60,21 @@ public interface ProgrammiMapper {
 
 	@Update("UPDATE PIATRI SET ID=#{id},ANNTRI=#{anno},BRETRI=#{descrizione},CENINT=#{codiceSA}," +
 			"NAPTRI=#{numeroApprovazione},DAPTRI=#{dataApprovazione},DPAPPROV=#{dataPubblicazioneApprovazione},TITAPPROV=#{titoloAttoApprovazione},URLAPPROV=#{urlAttoApprovazione},IDUFFICIO = #{idUfficio}," +
-			"NADOZI=#{numeroAdozione},DADOZI=#{dataAdozione},DPADOZI=#{dataPubblicazioneAdozione},TITADOZI=#{titoloAttoAdozione},URLADOZI=#{urlAttoAdozione},RESPRO=#{codiceReferente},SYSCON=#{syscon} " +
+			"NADOZI=#{numeroAdozione},DADOZI=#{dataAdozione},DPADOZI=#{dataPubblicazioneAdozione},TITADOZI=#{titoloAttoAdozione},URLADOZI=#{urlAttoAdozione},RESPRO=#{codiceReferente},SYSCON=#{syscon},NORMA=2 " +
 			" WHERE CONTRI=#{contri} AND ID_GENERATO=#{idRicevuto}" )
 			public void modificaPubblicazioneProgrammaLavori(PubblicaProgrammaLavoriEntry programma);
 
+	@Insert("INSERT INTO PIATRI (CONTRI,ID,NORMA,ANNTRI,BRETRI,CENINT,IDUFFICIO,TIPROG,NAPTRI,DAPTRI,DPAPPROV,TITAPPROV,URLAPPROV,NADOZI,DADOZI,DPADOZI,TITADOZI,URLADOZI,RESPRO,ID_GENERATO,ID_CLIENT,SYSCON) "
+			+ "VALUES (#{contri},#{id},3,#{anno},#{descrizione},#{codiceSA},#{idUfficio},1,#{numeroApprovazione},#{dataApprovazione},#{dataPubblicazioneApprovazione},#{titoloAttoApprovazione},#{urlAttoApprovazione}," 
+			+ "#{numeroAdozione},#{dataAdozione},#{dataPubblicazioneAdozione},#{titoloAttoAdozione},#{urlAttoAdozione},#{codiceReferente},#{idRicevuto},#{clientId},#{syscon})")
+			public void pubblicaProgrammaLavoriNorma3(PubblicaProgrammaLavoriEntry programma);
+
+	@Update("UPDATE PIATRI SET ID=#{id},ANNTRI=#{anno},BRETRI=#{descrizione},CENINT=#{codiceSA}," +
+			"NAPTRI=#{numeroApprovazione},DAPTRI=#{dataApprovazione},DPAPPROV=#{dataPubblicazioneApprovazione},TITAPPROV=#{titoloAttoApprovazione},URLAPPROV=#{urlAttoApprovazione},IDUFFICIO = #{idUfficio}," +
+			"NADOZI=#{numeroAdozione},DADOZI=#{dataAdozione},DPADOZI=#{dataPubblicazioneAdozione},TITADOZI=#{titoloAttoAdozione},URLADOZI=#{urlAttoAdozione},RESPRO=#{codiceReferente},SYSCON=#{syscon},NORMA=3 " +
+			" WHERE CONTRI=#{contri} AND ID_GENERATO=#{idRicevuto}" )
+			public void modificaPubblicazioneProgrammaLavoriNorma3(PubblicaProgrammaLavoriEntry programma);
+	
 	
 	@Insert("INSERT INTO PIATRI (CONTRI,ID,NORMA,ANNTRI,BRETRI,CENINT,IDUFFICIO,TIPROG,NAPTRI,DAPTRI,DPAPPROV,TITAPPROV,URLAPPROV,RESPRO,ID_GENERATO,ID_CLIENT,SYSCON) "
 			+ "VALUES (#{contri},#{id},2,#{anno},#{descrizione},#{codiceSA},#{idUfficio},2,#{numeroApprovazione},#{dataApprovazione},#{dataPubblicazioneApprovazione},#{titoloAttoApprovazione},#{urlAttoApprovazione}," 
@@ -72,9 +83,20 @@ public interface ProgrammiMapper {
 
 	@Update("UPDATE PIATRI SET ID=#{id},ANNTRI=#{anno},BRETRI=#{descrizione},CENINT=#{codiceSA}," +
 			"NAPTRI=#{numeroApprovazione},DAPTRI=#{dataApprovazione},DPAPPROV=#{dataPubblicazioneApprovazione},TITAPPROV=#{titoloAttoApprovazione},URLAPPROV=#{urlAttoApprovazione},IDUFFICIO = #{idUfficio}," +
-			"RESPRO=#{codiceReferente},SYSCON=#{syscon} " +
+			"RESPRO=#{codiceReferente},SYSCON=#{syscon},NORMA=2 " +
 			" WHERE CONTRI=#{contri} AND ID_GENERATO=#{idRicevuto}" )
 			public void modificaPubblicazioneProgrammaFornitureServizi(PubblicaProgrammaFornitureServiziEntry programma);
+
+	@Insert("INSERT INTO PIATRI (CONTRI,ID,NORMA,ANNTRI,BRETRI,CENINT,IDUFFICIO,TIPROG,NAPTRI,DAPTRI,DPAPPROV,TITAPPROV,URLAPPROV,RESPRO,ID_GENERATO,ID_CLIENT,SYSCON) "
+			+ "VALUES (#{contri},#{id},3,#{anno},#{descrizione},#{codiceSA},#{idUfficio},2,#{numeroApprovazione},#{dataApprovazione},#{dataPubblicazioneApprovazione},#{titoloAttoApprovazione},#{urlAttoApprovazione}," 
+			+ "#{codiceReferente},#{idRicevuto},#{clientId},#{syscon})")
+			public void pubblicaProgrammaFornitureServiziNorma3(PubblicaProgrammaFornitureServiziEntry programma);
+
+	@Update("UPDATE PIATRI SET ID=#{id},ANNTRI=#{anno},BRETRI=#{descrizione},CENINT=#{codiceSA}," +
+			"NAPTRI=#{numeroApprovazione},DAPTRI=#{dataApprovazione},DPAPPROV=#{dataPubblicazioneApprovazione},TITAPPROV=#{titoloAttoApprovazione},URLAPPROV=#{urlAttoApprovazione},IDUFFICIO = #{idUfficio}," +
+			"RESPRO=#{codiceReferente},SYSCON=#{syscon},NORMA=3 " +
+			" WHERE CONTRI=#{contri} AND ID_GENERATO=#{idRicevuto}" )
+			public void modificaPubblicazioneProgrammaFornitureServiziNorma3(PubblicaProgrammaFornitureServiziEntry programma);
 
 	
 	@Insert("INSERT into W9FLUSSI(IDFLUSSO, AREA, KEY01, KEY03, KEY04, TINVIO2, DATINV, NOTEINVIO, CODCOMP, CFSA, AUTORE, XML, CODOGG, DATIMP, IDCOMUN)" +
@@ -171,7 +193,7 @@ public interface ProgrammiMapper {
 			+ "DIRGEN,STRUOP,REFERE,RESPUF,PROAFF,COPFIN,VALUTAZIONE,"
 			+ "ACQVERDI,NORRIF,AVOGGETT,AVCPV,AVIMPNET,AVIVA,AVIMPTOT,"
 			+ "MATRIC,MROGGETT,MRCPV,MRIMPNET,MRIVA,MRIMPTOT,"
-			+ "TCPINT,MESEIN,DELEGA,CODAUSA,SOGAGG,VARIATO,INTNOTE,CODRUP)"
+			+ "TCPINT,MESEIN,DELEGA,CODAUSA,SOGAGG,VARIATO,INTNOTE,CODRUP,CIG_ACCQUADRO)"
 			+ "VALUES (#{contri},#{conint},#{codiceInterno},#{conint},1,#{cui},#{descrizione},#{anno},#{anno},"
 			+ "#{istat},#{nuts},#{esenteCup},#{cup},#{cpv},'L',#{priorita},#{lottoFunzionale},#{lavoroComplesso},#{tipologia},#{categoria},"
 			+ "#{scadenzaFinanziamento},#{finalita},#{conformitaAmbientale},#{conformitaUrbanistica},"
@@ -181,7 +203,7 @@ public interface ProgrammiMapper {
 			+ "#{direzioneGenerale},#{strutturaOperativa},#{referenteDati},#{dirigenteResponsabile},#{proceduraAffidamento},#{coperturaFinanziaria},#{valutazione},"
 			+ "#{acquistoVerdi},#{normativaRiferimento},#{oggettoVerdi},#{cpvVerdi},#{importoNettoIvaVerdi},#{importoIvaVerdi},#{importoTotVerdi},"
 			+ "#{acquistoMaterialiRiciclati},#{oggettoMatRic},#{cpvMatRic},#{importoNettoIvaMatRic},#{importoIvaMatRic},#{importoTotMatRic},"
-			+ "#{tipologiaCapitalePrivato},#{meseAvvioProcedura},#{delega},#{codiceSoggettoDelegato},#{nomeSoggettoDelegato},#{variato},#{note},#{codiceRup})")
+			+ "#{tipologiaCapitalePrivato},#{meseAvvioProcedura},#{delega},#{codiceSoggettoDelegato},#{nomeSoggettoDelegato},#{variato},#{note},#{codiceRup},#{cigAccordoQuadro})")
 			public void insertIntervento(InterventoEntry intervento);
 	
 	/**
@@ -197,25 +219,30 @@ public interface ProgrammiMapper {
 	@Insert("INSERT INTO INTTRI(CONTRI,CONINT,CODINT,NPROGINT,TIPINT,CUIINT,DESINT,ANNINT,ANNRIF,"
 			+ "COMINT,NUTS,FLAG_CUP,CUPPRG,CODCPV,TIPOIN,ACQALTINT,CUICOLL,"
 			+ "QUANTIT,UNIMIS,PRGINT,LOTFUNZ,DURCONT,CONTESS,"
-			+ "DV1TRI,DV2TRI,DV9TRI,MU1TRI,MU2TRI,MU9TRI,"
-			+ "IM1TRI,IM2TRI,IM9TRI,BI1TRI,BI2TRI,BI9TRI,AL1TRI,AL2TRI,AL9TRI,"
-			+ "AP1TRI,AP2TRI,AP9TRI,PR1TRI,PR2TRI,PR9TRI,SPESESOST,"
+			+ "DV1TRI,DV2TRI,DV3TRI,DV9TRI,MU1TRI,MU2TRI,MU3TRI,MU9TRI,"
+			+ "IM1TRI,IM2TRI,IM3TRI,IM9TRI,BI1TRI,BI2TRI,BI3TRI,BI9TRI,AL1TRI,AL2TRI,AL3TRI,AL9TRI,"
+			+ "AP1TRI,AP2TRI,AP3TRI,AP9TRI,PR1TRI,PR2TRI,PR3TRI,PR9TRI,SPESESOST,"
 			+ "DIRGEN,STRUOP,REFERE,RESPUF,PROAFF,"
 			+ "ACQVERDI,NORRIF,AVOGGETT,AVCPV,AVIMPNET,AVIVA,AVIMPTOT,"
 			+ "MATRIC,MROGGETT,MRCPV,MRIMPNET,MRIVA,MRIMPTOT,"
-			+ "IV1TRI,IV2TRI,IV9TRI,COPFIN,VALUTAZIONE,"
-			+ "TCPINT,IMPRFS,RG1TRI,IMPALT,MESEIN,DELEGA,CODAUSA,SOGAGG,VARIATO,INTNOTE,CODRUP)"
+			+ "IV1TRI,IV2TRI,IV3TRI,IV9TRI,COPFIN,VALUTAZIONE,"
+			+ "TCPINT,IMPRFS,RG1TRI,IMPALT,MESEIN,DELEGA,CODAUSA,SOGAGG,VARIATO,INTNOTE,CODRUP,CIG_ACCQUADRO)"
 			+ "VALUES (#{contri},#{conint},#{codiceInterno},#{conint},2,#{cui},#{descrizione},#{anno},#{anno},"
 			+ "#{istat},#{nuts},#{esenteCup},#{cup},#{cpv},#{settore},#{acquistoRicompreso},#{cuiCollegato},"
 			+ "#{quantita},#{unitaMisura},#{priorita},#{lottoFunzionale},#{durataInMesi},#{nuovoAffidamento},"
-			+ "#{risorseVincolatePerLegge1},#{risorseVincolatePerLegge2},#{risorseVincolatePerLeggeSucc},#{risorseMutuo1},#{risorseMutuo2},#{risorseMutuoSucc},"
-			+ "#{risorseImmobili1},#{risorseImmobili2},#{risorseImmobiliSucc},#{risorseBilancio1},#{risorseBilancio2},#{risorseBilancioSucc},#{risorseAltro1},#{risorseAltro2},#{risorseAltroSucc},"
-			+ "#{risorseArt3_1},#{risorseArt3_2},#{risorseArt3_Succ},#{risorsePrivati1},#{risorsePrivati2},#{risorsePrivatiSucc},#{speseSostenute},"
+			+ "#{risorseVincolatePerLegge1},#{risorseVincolatePerLegge2},#{risorseVincolatePerLegge3},#{risorseVincolatePerLeggeSucc},"
+			+ "#{risorseMutuo1},#{risorseMutuo2},#{risorseMutuo3},#{risorseMutuoSucc},"
+			+ "#{risorseImmobili1},#{risorseImmobili2},#{risorseImmobili3},#{risorseImmobiliSucc},"
+			+ "#{risorseBilancio1},#{risorseBilancio2},#{risorseBilancio3},#{risorseBilancioSucc},"
+			+ "#{risorseAltro1},#{risorseAltro2},#{risorseAltro3},#{risorseAltroSucc},"
+			+ "#{risorseArt3_1},#{risorseArt3_2},#{risorseArt3_3},#{risorseArt3_Succ},"
+			+ "#{risorsePrivati1},#{risorsePrivati2},#{risorsePrivati3},#{risorsePrivatiSucc},#{speseSostenute},"
 			+ "#{direzioneGenerale},#{strutturaOperativa},#{referenteDati},#{dirigenteResponsabile},#{proceduraAffidamento},"
 			+ "#{acquistoVerdi},#{normativaRiferimento},#{oggettoVerdi},#{cpvVerdi},#{importoNettoIvaVerdi},#{importoIvaVerdi},#{importoTotVerdi},"
 			+ "#{acquistoMaterialiRiciclati},#{oggettoMatRic},#{cpvMatRic},#{importoNettoIvaMatRic},#{importoIvaMatRic},#{importoTotMatRic},"
-			+ "#{importoIva1},#{importoIva2},#{importoIvaSucc},#{coperturaFinanziaria},#{valutazione},"
-			+ "#{tipologiaCapitalePrivato},#{importoRisorseFinanziarie},#{importoRisorseFinanziarieRegionali},#{importoRisorseFinanziarieAltro},#{meseAvvioProcedura},#{delega},#{codiceSoggettoDelegato},#{nomeSoggettoDelegato},#{variato},#{note},#{codiceRup})")
+			+ "#{importoIva1},#{importoIva2},#{importoIva3},#{importoIvaSucc},#{coperturaFinanziaria},#{valutazione},"
+			+ "#{tipologiaCapitalePrivato},#{importoRisorseFinanziarie},#{importoRisorseFinanziarieRegionali},#{importoRisorseFinanziarieAltro},"
+			+ "#{meseAvvioProcedura},#{delega},#{codiceSoggettoDelegato},#{nomeSoggettoDelegato},#{variato},#{note},#{codiceRup},#{cigAccordoQuadro})")
 			public void insertAcquisto(AcquistoEntry acquisto);
 	
 	/**
@@ -372,7 +399,7 @@ public interface ProgrammiMapper {
 			+"PR1TRI, PR2TRI, PR3TRI, PR9TRI, SPESESOST, DIRGEN, STRUOP, REFERE, RESPUF, PROAFF, COPFIN, "
 			+"VALUTAZIONE, ACQVERDI, NORRIF, AVOGGETT, AVCPV, AVIMPNET, AVIVA, AVIMPTOT, "
 			+"MATRIC, MROGGETT, MRCPV, MRIMPNET, MRIVA, MRIMPTOT, "
-			+"TCPINT, MESEIN, DELEGA, CODAUSA, SOGAGG, VARIATO, INTNOTE, CODRUP "
+			+"TCPINT, MESEIN, DELEGA, CODAUSA, SOGAGG, CIG_ACCQUADRO, VARIATO, INTNOTE, CODRUP "
 			+"from INTTRI where CONTRI = #{contri} ORDER BY NPROGINT")
 	@Results({
 		@Result(property = "conint", column = "CONINT"),
@@ -450,6 +477,7 @@ public interface ProgrammiMapper {
 		@Result(property = "delega", column = "DELEGA"),
 		@Result(property = "codiceSoggettoDelegato", column = "CODAUSA"),
 		@Result(property = "nomeSoggettoDelegato", column = "SOGAGG"),
+		@Result(property = "cigAccordoQuadro", column = "CIG_ACCQUADRO"),
 		@Result(property = "variato", column = "VARIATO"),
 		@Result(property = "note", column = "INTNOTE"),
 		@Result(property = "codiceRup", column = "CODRUP")
@@ -541,13 +569,13 @@ public interface ProgrammiMapper {
 
 	@Select("select CONINT, CODINT, CUIINT, DESINT, ANNRIF, COMINT, NUTS, FLAG_CUP, CUPPRG, CODCPV, TIPOIN, ACQALTINT, CUICOLL, "
 			+"QUANTIT, UNIMIS, PRGINT, LOTFUNZ, DURCONT, CONTESS, "
-			+"DV1TRI, DV2TRI, DV9TRI, MU1TRI, MU2TRI, MU9TRI, IM1TRI, IM2TRI, IM9TRI, "
-			+"BI1TRI, BI2TRI, BI9TRI, AL1TRI, AL2TRI, AL9TRI, AP1TRI, AP2TRI, AP9TRI, "
-			+"PR1TRI, PR2TRI, PR9TRI, SPESESOST, DIRGEN, STRUOP, REFERE, RESPUF, PROAFF, "
+			+"DV1TRI, DV2TRI, DV3TRI, DV9TRI, MU1TRI, MU2TRI, MU3TRI, MU9TRI, IM1TRI, IM2TRI, IM3TRI, IM9TRI, "
+			+"BI1TRI, BI2TRI, BI3TRI, BI9TRI, AL1TRI, AL2TRI, AL3TRI, AL9TRI, AP1TRI, AP2TRI, AP3TRI, AP9TRI, "
+			+"PR1TRI, PR2TRI, PR3TRI, PR9TRI, SPESESOST, DIRGEN, STRUOP, REFERE, RESPUF, PROAFF, "
 			+"ACQVERDI, NORRIF, AVOGGETT, AVCPV, AVIMPNET, AVIVA, AVIMPTOT, "
 			+"MATRIC, MROGGETT, MRCPV, MRIMPNET, MRIVA, MRIMPTOT, "
-			+"IV1TRI, IV2TRI, IV9TRI, COPFIN, VALUTAZIONE, "
-			+"TCPINT, IMPRFS, RG1TRI, IMPALT, MESEIN, DELEGA, CODAUSA, SOGAGG, VARIATO, INTNOTE, CODRUP "
+			+"IV1TRI, IV2TRI, IV3TRI, IV9TRI, COPFIN, VALUTAZIONE, "
+			+"TCPINT, IMPRFS, RG1TRI, IMPALT, MESEIN, DELEGA, CODAUSA, SOGAGG, VARIATO, CIG_ACCQUADRO, INTNOTE, CODRUP "
 			+"from INTTRI where CONTRI = #{contri} ORDER BY CONINT")
 	@Results({
 		@Result(property = "conint", column = "CONINT"),
@@ -571,24 +599,30 @@ public interface ProgrammiMapper {
 		@Result(property = "nuovoAffidamento", column = "CONTESS"),
 		@Result(property = "risorseVincolatePerLegge1", column = "DV1TRI"),
 		@Result(property = "risorseVincolatePerLegge2", column = "DV2TRI"),
+		@Result(property = "risorseVincolatePerLegge3", column = "DV3TRI"),
 		@Result(property = "risorseVincolatePerLeggeSucc", column = "DV9TRI"),
 		@Result(property = "risorseMutuo1", column = "MU1TRI"),
 		@Result(property = "risorseMutuo2", column = "MU2TRI"),
+		@Result(property = "risorseMutuo3", column = "MU3TRI"),
 		@Result(property = "risorseMutuoSucc", column = "MU9TRI"),
 		@Result(property = "risorseImmobili1", column = "IM1TRI"),
 		@Result(property = "risorseImmobili2", column = "IM2TRI"),
+		@Result(property = "risorseImmobili3", column = "IM3TRI"),
 		@Result(property = "risorseImmobiliSucc", column = "IM9TRI"),
 		@Result(property = "risorseBilancio1", column = "BI1TRI"),
 		@Result(property = "risorseBilancio2", column = "BI2TRI"),
+		@Result(property = "risorseBilancio3", column = "BI3TRI"),
 		@Result(property = "risorseBilancioSucc", column = "BI9TRI"),
 		@Result(property = "risorseAltro1", column = "AL1TRI"),
 		@Result(property = "risorseAltro2", column = "AL2TRI"),
 		@Result(property = "risorseAltroSucc", column = "AL9TRI"),
 		@Result(property = "risorseArt3_1", column = "AP1TRI"),
 		@Result(property = "risorseArt3_2", column = "AP2TRI"),
+		@Result(property = "risorseArt3_3", column = "AP3TRI"),
 		@Result(property = "risorseArt3_Succ", column = "AP9TRI"),
 		@Result(property = "risorsePrivati1", column = "PR1TRI"),
 		@Result(property = "risorsePrivati2", column = "PR2TRI"),
+		@Result(property = "risorsePrivati3", column = "PR3TRI"),
 		@Result(property = "risorsePrivatiSucc", column = "PR9TRI"),
 		@Result(property = "speseSostenute", column = "SPESESOST"),
 		@Result(property = "direzioneGenerale", column = "DIRGEN"),
@@ -611,6 +645,7 @@ public interface ProgrammiMapper {
 		@Result(property = "importoTotMatRic", column = "MRIMPTOT"),
 		@Result(property = "importoIva1", column = "IV1TRI"),
 		@Result(property = "importoIva2", column = "IV2TRI"),
+		@Result(property = "importoIva3", column = "IV3TRI"),
 		@Result(property = "importoIvaSucc", column = "IV9TRI"),
 		@Result(property = "coperturaFinanziaria", column = "COPFIN"),
 		@Result(property = "valutazione", column = "VALUTAZIONE"),
@@ -622,6 +657,7 @@ public interface ProgrammiMapper {
 		@Result(property = "delega", column = "DELEGA"),
 		@Result(property = "codiceSoggettoDelegato", column = "CODAUSA"),
 		@Result(property = "nomeSoggettoDelegato", column = "SOGAGG"),
+		@Result(property = "cigAccordoQuadro", column = "CIG_ACCQUADRO"),
 		@Result(property = "variato", column = "VARIATO"),
 		@Result(property = "note", column = "INTNOTE"),
 		@Result(property = "codiceRup", column = "CODRUP")

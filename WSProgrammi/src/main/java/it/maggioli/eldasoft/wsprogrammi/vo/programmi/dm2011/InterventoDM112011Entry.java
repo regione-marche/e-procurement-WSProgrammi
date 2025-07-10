@@ -101,7 +101,7 @@ public class InterventoDM112011Entry implements Serializable {
 	@Size(max=2000)
 	private String descrizione;
 	
-	@ApiModelProperty(value = "Annualità di riferimento dell'intervento (1°,2°,3° anno)",allowableValues="range[1, 3]", required = true)
+	@ApiModelProperty(value = "Annualita' di riferimento dell'intervento (1°,2°,3° anno)",allowableValues="range[1, 3]", required = true)
 	private Long annualitaRiferimento;
 	
 	@ApiModelProperty(value="Classificazione intervento: Tipologia (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipologiaInterventoDM112011)")
@@ -136,22 +136,22 @@ public class InterventoDM112011Entry implements Serializable {
 	@Size(max=20)
 	private String cpv;
 	
-	@ApiModelProperty(value="L'intervento è stato inserito nel Piano annuale? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
+	@ApiModelProperty(value="L'intervento e' stato inserito nel Piano annuale? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
 	@Size(max=1)
 	private String annuale;
 	
-	@ApiModelProperty(value="Finalità dell'intervento (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=FinalitaDM112011)")
+	@ApiModelProperty(value="Finalita' dell'intervento (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=FinalitaDM112011)")
 	@Size(max=5)
 	private String finalita;
 	
-	@ApiModelProperty(value="Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)")
+	@ApiModelProperty(value="Livello di Priorita' (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)")
 	private Long priorita;
 	
-	@ApiModelProperty(value="Svolta verifica conformità urbanistica? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
+	@ApiModelProperty(value="Svolta verifica conformita' urbanistica? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
 	@Size(max=1)
 	private String conformitaUrbanistica;
 	
-	@ApiModelProperty(value="Svolta verifica conformità vincoli ambientali? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
+	@ApiModelProperty(value="Svolta verifica conformita' vincoli ambientali? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
 	@Size(max=1)
 	private String conformitaAmbientale;
 	

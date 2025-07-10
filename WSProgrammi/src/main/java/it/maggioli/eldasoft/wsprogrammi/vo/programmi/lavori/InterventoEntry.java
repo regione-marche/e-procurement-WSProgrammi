@@ -87,6 +87,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		"delega",
 		"codiceSoggettoDelegato",
 		"nomeSoggettoDelegato",
+		"cigAccordoQuadro",
 		"variato",
 		"note",
 		"direzioneGenerale",
@@ -131,7 +132,7 @@ public class InterventoEntry implements Serializable {
 	@ApiModelProperty(value = "[Deprecato] Numero progressivo intervento")
 	private Long numeroProgressivo;
 	
-	@ApiModelProperty(value = "Numero intervento CUI (‘L’ + CodiceFiscale Stazione Appaltante(11 char) + anno (4 char) + progressivo (5 char))", required=true)
+	@ApiModelProperty(value = "Numero intervento CUI ('L' + CodiceFiscale Stazione Appaltante(11 char) + anno (4 char) + progressivo (5 char))", required=true)
 	@Size(max=25)
 	private String cui;
 	
@@ -143,7 +144,7 @@ public class InterventoEntry implements Serializable {
 	@Size(max=2000)
 	private String descrizione;
 	
-	@ApiModelProperty(value = "Annualità di riferimento avvio procedura di affidamento(1°,2°,3° anno)",allowableValues="range[1, 3]", required = true)
+	@ApiModelProperty(value = "Annualita' di riferimento avvio procedura di affidamento(1°,2°,3° anno)",allowableValues="range[1, 3]", required = true)
 	private Long anno;
 	
 	@ApiModelProperty(value="Esente dalla richiesta CUP? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
@@ -166,7 +167,7 @@ public class InterventoEntry implements Serializable {
 	@Size(max=20)
 	private String nuts;
 	
-	@ApiModelProperty(value="Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)")
+	@ApiModelProperty(value="Livello di Priorita' (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)")
 	private Long priorita;
 	
 	@ApiModelProperty(value="Lotto funzionale? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
@@ -189,15 +190,15 @@ public class InterventoEntry implements Serializable {
 	@ApiModelProperty(value="Scadenza finanziamento da mutuo")  
 	private Date scadenzaFinanziamento; 
 	
-	@ApiModelProperty(value="Finalità dell'intervento (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Finalita)")
+	@ApiModelProperty(value="Finalita' dell'intervento (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Finalita)")
 	@Size(max=5)
 	private String finalita;
 	
-	@ApiModelProperty(value="Svolta verifica conformità urbanistica? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
+	@ApiModelProperty(value="Svolta verifica conformita' urbanistica? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
 	@Size(max=1)
 	private String conformitaUrbanistica;
 	
-	@ApiModelProperty(value="Svolta verifica conformità vincoli ambientali? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
+	@ApiModelProperty(value="Svolta verifica conformita' vincoli ambientali? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
 	@Size(max=1)
 	private String conformitaAmbientale;
 	
@@ -214,7 +215,7 @@ public class InterventoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Terzo anno")
 	private Double risorseVincolatePerLegge3;
 	
-	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Annualità successive")
+	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Annualita' successive")
 	private Double risorseVincolatePerLeggeSucc;
 	
 	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Primo anno")
@@ -226,7 +227,7 @@ public class InterventoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Terzo anno")
 	private Double risorseMutuo3;
 	
-	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Annualità successive")
+	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Annualita' successive")
 	private Double risorseMutuoSucc;
 	
 	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Primo anno")
@@ -238,7 +239,7 @@ public class InterventoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Terzo anno")
 	private Double risorsePrivati3;
 	
-	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Annualità successive")
+	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Annualita' successive")
 	private Double risorsePrivatiSucc;
 	
 	@ApiModelProperty(value="Stanziamenti di bilancio - Primo anno")
@@ -250,7 +251,7 @@ public class InterventoEntry implements Serializable {
 	@ApiModelProperty(value="Stanziamenti di bilancio - Terzo anno")
 	private Double risorseBilancio3;
 	
-	@ApiModelProperty(value="Stanziamenti di bilancio - Annualità successive")
+	@ApiModelProperty(value="Stanziamenti di bilancio - Annualita' successive")
 	private Double risorseBilancioSucc;
 	
 	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Primo anno")
@@ -262,7 +263,7 @@ public class InterventoEntry implements Serializable {
 	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Terzo anno")
 	private Double risorseArt3_3;
 	
-	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Annualità successive")
+	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Annualita' successive")
 	private Double risorseArt3_Succ;
 	
 	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Primo anno")
@@ -274,7 +275,7 @@ public class InterventoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Terzo anno")
 	private Double risorseImmobili3;
 	
-	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Annualità successive")
+	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Annualita' successive")
 	private Double risorseImmobiliSucc;
 	
 	@ApiModelProperty(value="Altra tipologia - Primo anno")
@@ -286,10 +287,10 @@ public class InterventoEntry implements Serializable {
 	@ApiModelProperty(value="Altra tipologia - Terzo anno")
 	private Double risorseAltro3;
 	
-	@ApiModelProperty(value="Altra tipologia - Annualità successive")
+	@ApiModelProperty(value="Altra tipologia - Annualita' successive")
 	private Double risorseAltroSucc;
 
-	@ApiModelProperty(value="Spese già sostenute")
+	@ApiModelProperty(value="Spese gia' sostenute")
 	private Double speseSostenute;
 	
 	@ApiModelProperty(value="Tipologia apporto di capitale privato (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipologiaCapitalePrivato)")
@@ -310,6 +311,10 @@ public class InterventoEntry implements Serializable {
 	@ApiModelProperty(value = "Denominazione del Soggetto delegato")
 	@Size(max=160)
 	private String nomeSoggettoDelegato;
+	
+	@ApiModelProperty(value = "CIG accordo quadro/convenzione")
+	@Size(max=10)
+	private String cigAccordoQuadro;
 	
 	@ApiModelProperty(value="Intervento variato a seguito di modifica programma (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=VariatoInterventi)")
 	private Long variato;
@@ -826,6 +831,14 @@ public class InterventoEntry implements Serializable {
 
 	public String getNomeSoggettoDelegato() {
 		return nomeSoggettoDelegato;
+	}
+
+	public void setCigAccordoQuadro(String cigAccordoQuadro) {
+		this.cigAccordoQuadro = StringUtils.stripToNull(cigAccordoQuadro);
+	}
+
+	public String getCigAccordoQuadro() {
+		return cigAccordoQuadro;
 	}
 
 	public void setVariato(Long variato) {

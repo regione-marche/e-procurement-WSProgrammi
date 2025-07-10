@@ -97,7 +97,7 @@ public class FornitureServiziDM112011Entry implements Serializable {
 	@Size(max=1)
 	private String settore;
 	
-	@ApiModelProperty(value="Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)")
+	@ApiModelProperty(value="Livello di Priorita' (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)")
 	private Long priorita;
 	
 	@ApiModelProperty(value="Normativa di riferimento")

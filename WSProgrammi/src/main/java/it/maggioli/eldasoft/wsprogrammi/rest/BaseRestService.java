@@ -42,7 +42,7 @@ public class BaseRestService {
 			return result;
 		} catch (Exception e) {
 			result.setValidated(false);
-			result.setError("Il token non è valido.");
+			result.setError("Il token non e' valido.");
 			return result;
 		}
 	}

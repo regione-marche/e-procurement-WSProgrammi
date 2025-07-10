@@ -62,7 +62,7 @@ public class ImmobileEntry implements Serializable {
 	@ApiModelProperty(hidden=true)
 	private Long numoi;
 	
-	@ApiModelProperty(value="Codice univoco immobile (‘I’ + CodiceFiscale Stazione Appaltante(11 char) + anno (4 char) + progressivo (5 char))", required=true)
+	@ApiModelProperty(value="Codice univoco immobile ('I' + CodiceFiscale Stazione Appaltante(11 char) + anno (4 char) + progressivo (5 char))", required=true)
 	@Size(max=30)
 	private String cui;
 	
@@ -84,7 +84,7 @@ public class ImmobileEntry implements Serializable {
 	@Size(max=1)
 	private String alienati;
 	
-	@ApiModelProperty(value="Già incluso in programma di dismissione art. 27 DL 201/2011 (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=ProgrammaDismissione)")
+	@ApiModelProperty(value="Gia' incluso in programma di dismissione art. 27 DL 201/2011 (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=ProgrammaDismissione)")
 	private Long inclusoProgrammaDismissione;
 	
 	@ApiModelProperty(value = "Descrizione dell'immobile")
@@ -92,10 +92,10 @@ public class ImmobileEntry implements Serializable {
 	private String descrizione;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@ApiModelProperty(value="*[Attributo non utilizzato] Tipo proprietà (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipoProprieta)")
+	@ApiModelProperty(value="*[Attributo non utilizzato] Tipo proprieta' (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipoProprieta)", hidden = true)
 	private Long tipoProprieta;
 	
-	@ApiModelProperty(value="Tipo proprietà (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipoDisponibilita)")
+	@ApiModelProperty(value="Tipo proprieta' (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipoDisponibilita)")
 	private Long tipoDisponibilita;
 	
 	@ApiModelProperty(value="Valore stimato dell'immobile - Primo anno")
@@ -107,7 +107,7 @@ public class ImmobileEntry implements Serializable {
 	@ApiModelProperty(value="Valore stimato dell'immobile - Terzo anno")
 	private Double valoreStimato3;
 
-	@ApiModelProperty(value="Valore stimato dell'immobile - Annualità successive")
+	@ApiModelProperty(value="Valore stimato dell'immobile - Annualita' successive")
 	private Double valoreStimatoSucc;
 	
 	public void setIstat(String istat) {

@@ -63,10 +63,10 @@ public class InterventoNonRipropostoEntry implements Serializable {
 	@ApiModelProperty(value="Importo complessivo", required=true)
 	private Double importo;
 	
-	@ApiModelProperty(value="Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)", required=true)
+	@ApiModelProperty(value="Livello di Priorita' (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)", required=true)
 	private Long priorita;
 	
-	@ApiModelProperty(value = "Motivo per il quale l'intervento non è riproposto", required=true)
+	@ApiModelProperty(value = "Motivo per il quale l'intervento non e' riproposto", required=true)
 	@Size(max=2000)
 	private String motivo;
 

@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import it.maggioli.eldasoft.wsprogrammi.bl.ProgrammiManager;
+import it.maggioli.eldasoft.wsprogrammi.utils.HandlerPostPubblica;
 import it.maggioli.eldasoft.wsprogrammi.vo.AllegatoEntry;
 import it.maggioli.eldasoft.wsprogrammi.vo.PubblicazioneResult;
 import it.maggioli.eldasoft.wsprogrammi.vo.TokenValidationResult;
@@ -48,7 +49,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.io.ByteStreams;
 
 /**
- * Servizio REST esposto al path "/Programmi".
+ * Servizio REST esposto al path "/Programmi"
  */
 @Path("/Programmi")
 @Component
@@ -80,7 +81,7 @@ public class ProgrammiRestService extends BaseRestService{
 	@Path("/PubblicaDM112011")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(nickname = "ProgrammiRestService.pubblicaDM112011", value = "[Deprecato] Pubblica i dati e i documenti relativi ad un programma DM 11/2011", notes = "Ritorna il risultato della pubblicazione e l'id assegnato dal sistema, che dovrà essere riutilizzato per successive pubblicazioni", response = PubblicazioneResult.class)
+	@ApiOperation(nickname = "ProgrammiRestService.pubblicaDM112011", value = "[Deprecato] Pubblica i dati e i documenti relativi ad un programma DM 11/2011", notes = "Ritorna il risultato della pubblicazione e l'id assegnato dal sistema, che dovra' essere riutilizzato per successive pubblicazioni", response = PubblicazioneResult.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Operazione effettuata con successo"),
 			@ApiResponse(code = 400, message = "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"),
@@ -124,13 +125,16 @@ public class ProgrammiRestService extends BaseRestService{
 				try {
 					risultato = this.programmiManager.pubblicaDM112011(programma, modalitaInvio);
 					// aggiorno importi e genero pdf
-					try {
+					Runnable process = new HandlerPostPubblica(programma.getContri(), new Long(3), programma.getIdRicevuto(), this.programmiManager, this.context, programma.getId());
+					Thread thread = new Thread(process);
+					thread.start();
+					/*try {
 						this.programmiManager.AggiornaImportiProgramma(programma.getContri(), new Long(3));
 						//this.programmiManager.creaPdf(programma.getId(),programma.getContri(), programma.getIdRicevuto(), servletContext);
 					} catch (Exception ex) {
 						logger.error("Errore durante la generazione PDF del programma dm 11/2011",
 								ex);
-					}
+					}*/
 				} catch (Exception ex) {
 					logger.error(
 							"Errore inaspettato durante la pubblicazione del programma dm 11/2011",
@@ -165,7 +169,7 @@ public class ProgrammiRestService extends BaseRestService{
 	@Path("/PubblicaLavori")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(nickname = "ProgrammiRestService.pubblicaLavori", value = "Pubblica i dati e i documenti relativi ad un programma di lavori", notes = "Ritorna il risultato della pubblicazione e l'id assegnato dal sistema, che dovrà essere riutilizzato per successive pubblicazioni", response = PubblicazioneResult.class)
+	@ApiOperation(nickname = "ProgrammiRestService.pubblicaLavori", value = "Pubblica i dati e i documenti relativi ad un programma di lavori", notes = "Ritorna il risultato della pubblicazione e l'id assegnato dal sistema, che dovra' essere riutilizzato per successive pubblicazioni", response = PubblicazioneResult.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Operazione effettuata con successo"),
 			@ApiResponse(code = 400, message = "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"),
@@ -227,13 +231,17 @@ public class ProgrammiRestService extends BaseRestService{
 				try {
 					risultato = this.programmiManager.pubblicaLavori(programma, modalitaInvio);
 					// aggiorno importi e genero pdf
+					Runnable process = new HandlerPostPubblica(programma.getContri(), new Long(1), programma.getIdRicevuto(), this.programmiManager, this.context, programma.getId());
+					Thread thread = new Thread(process);
+					thread.start();
+					/*
 					try {
 						this.programmiManager.AggiornaImportiProgramma(programma.getContri(), new Long(1));
 						//this.programmiManager.creaPdfNuovaNormativa(programma.getId(),programma.getContri(), new Long(1), programma.getIdRicevuto(), servletContext);
 					} catch (Exception ex) {
 						logger.error("Errore durante la generazione PDF del programma dm 11/2011",
 								ex);
-					}
+					}*/
 				} catch (Exception ex) {
 					logger.error(
 							"Errore inaspettato durante la pubblicazione del programma lavori",
@@ -268,7 +276,7 @@ public class ProgrammiRestService extends BaseRestService{
 	@Path("/PubblicaFornitureServizi")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(nickname = "ProgrammiRestService.pubblicaFornitureServizi", value = "Pubblica i dati e i documenti relativi ad un programma di forniture e servizi", notes = "Ritorna il risultato della pubblicazione e l'id assegnato dal sistema, che dovrà essere riutilizzato per successive pubblicazioni", response = PubblicazioneResult.class)
+	@ApiOperation(nickname = "ProgrammiRestService.pubblicaFornitureServizi", value = "Pubblica i dati e i documenti relativi ad un programma di forniture e servizi", notes = "Ritorna il risultato della pubblicazione e l'id assegnato dal sistema, che dovra' essere riutilizzato per successive pubblicazioni", response = PubblicazioneResult.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Operazione effettuata con successo"),
 			@ApiResponse(code = 400, message = "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"),
@@ -331,13 +339,16 @@ public class ProgrammiRestService extends BaseRestService{
 				try {
 					risultato = this.programmiManager.pubblicaFornitureServizi(programma, modalitaInvio);
 					// aggiorno importi e genero pdf
-					try {
+					Runnable process = new HandlerPostPubblica(programma.getContri(), new Long(2), programma.getIdRicevuto(), this.programmiManager, this.context, programma.getId());
+					Thread thread = new Thread(process);
+					thread.start();
+					/*try {
 						this.programmiManager.AggiornaImportiProgramma(programma.getContri(), new Long(2));
 						//this.programmiManager.creaPdfNuovaNormativa(programma.getId(),programma.getContri(), new Long(2), programma.getIdRicevuto(), servletContext);
 					} catch (Exception ex) {
 						logger.error("Errore durante la generazione PDF del programma dm 11/2011",
 								ex);
-					}
+					}*/
 				} catch (Exception ex) {
 					logger.error(
 							"Errore inaspettato durante la pubblicazione del programma forniture e servizi",
@@ -385,7 +396,7 @@ public class ProgrammiRestService extends BaseRestService{
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "Operazione effettuata con successo"),
 			@ApiResponse(code = 400, message = "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"),
 			@ApiResponse(code = 401, message = "Non si possiedono le credenziali per questo programma (si veda l'attributo error della risposta)"),
-			@ApiResponse(code = 404, message = "Il programma richiesto non è stato trovato (si veda l'attributo error della risposta)"),
+			@ApiResponse(code = 404, message = "Il programma richiesto non e' stato trovato (si veda l'attributo error della risposta)"),
 			@ApiResponse(code = 500, message = "Errori durante l'esecuzione dell'operazione (si veda l'attributo error della risposta)") })
 			public Response dettaglioLavori(
 					@ApiParam(value = "Identificativo univoco SCP - IdRicevuto", required = true) @QueryParam("idRicevuto") Long idRicevuto, 
@@ -450,7 +461,7 @@ public class ProgrammiRestService extends BaseRestService{
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "Operazione effettuata con successo"),
 			@ApiResponse(code = 400, message = "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"),
 			@ApiResponse(code = 401, message = "Non si possiedono le credenziali per questo programma (si veda l'attributo error della risposta)"),
-			@ApiResponse(code = 404, message = "Il programma richiesto non è stato trovato (si veda l'attributo error della risposta)"),
+			@ApiResponse(code = 404, message = "Il programma richiesto non e' stato trovato (si veda l'attributo error della risposta)"),
 			@ApiResponse(code = 500, message = "Errori durante l'esecuzione dell'operazione (si veda l'attributo error della risposta)") })
 			public Response dettaglioFornitureServizi(
 					@ApiParam(value = "Identificativo univoco SCP - IdRicevuto", required = true) @QueryParam("idRicevuto") Long idRicevuto, 

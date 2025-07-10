@@ -1,8 +1,17 @@
 package it.maggioli.eldasoft.wsprogrammi.bl;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 
 import it.maggioli.eldasoft.wsprogrammi.dao.ProgrammiMapper;
 import it.maggioli.eldasoft.wsprogrammi.dao.SqlMapper;
@@ -27,13 +36,19 @@ import it.maggioli.eldasoft.wsprogrammi.vo.programmi.lavori.OperaIncompiutaEntry
 import it.maggioli.eldasoft.wsprogrammi.vo.programmi.lavori.PubblicaProgrammaLavoriEntry;
 import it.maggioli.eldasoft.wsprogrammi.utils.Costanti;
 
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,6 +72,12 @@ public class ProgrammiManager {
 
 	@Autowired
 	private TecniciMapper tecniciMapper;
+	
+	@Autowired
+	DataSource dataSource;
+	
+	@Autowired
+	private WGenChiaviManager wgenChiaviManager;
 	
 	//@Autowired
 	//private ApplicationContext appContext;
@@ -84,17 +105,16 @@ public class ProgrammiManager {
 		this.tecniciMapper = tecniciMapper;
 	}
 	
-	@Transactional(isolation = Isolation.READ_COMMITTED)
-	private Long getNextId(String table) {
-		this.sqlMapper.execute("UPDATE W_GENCHIAVI SET CHIAVE=CHIAVE+1 WHERE TABELLA='" + table + "'");
-		Integer i = this.sqlMapper.execute("SELECT chiave FROM W_GENCHIAVI WHERE TABELLA='" + table + "'");
-		if (i == null) {
-			i = 1;
-		}
-		return new Long(i);
-	}
 	/**
-	 * @return ritorna la tipologia dell'applicazione dov'è installato il servizio 
+	 * @param wgenChiaviManager
+	 * 			wgenChiaviManager da settare internamente alla classe.
+	 */
+	public void setWGenChiaviManager(WGenChiaviManager wgenChiaviManager) {
+		this.wgenChiaviManager = wgenChiaviManager;
+	}
+
+	/**
+	 * @return ritorna la tipologia dell'applicazione dov'e' installato il servizio 
 	 */
 	private Long tipoInstallazione() {
 		if (Costanti.tipoInstallazione == null) {
@@ -166,12 +186,10 @@ public class ProgrammiManager {
 			}
 			programma.setContri(contri);
 			//ricavo l'id univoco della pubblicazione
-			Long idRicevuto = this.getNextId("W9PUBBLICAZIONI_GEN");
+			Long idRicevuto = this.wgenChiaviManager.getNextId("W9PUBBLICAZIONI_GEN");
 			logger.info("PubblicaDM112011 idRicevuto = " + idRicevuto);
-			//i = this.sqlMapper.execute("SELECT chiave FROM W_GENCHIAVI WHERE TABELLA='W9PUBBLICAZIONI_GEN'");
 			risultato.setId(idRicevuto);
 			programma.setIdRicevuto(idRicevuto);
-			//this.sqlMapper.execute("UPDATE W_GENCHIAVI SET CHIAVE=CHIAVE+1 WHERE TABELLA='W9PUBBLICAZIONI_GEN'");
 			this.programmiMapper.pubblicaProgrammaDM112011(programma);
 		} else {
 			tipoInvio = new Long(2);
@@ -243,6 +261,7 @@ public class ProgrammiManager {
 						//il rup non esiste lo creo
 						codiceRup = this.calcolaCodificaAutomatica("TECNI", "CODTEC");	//Autogenero un codice per il tecnico
 						fornserv.getRup().setCodice(codiceRup);
+						fornserv.getRup().setCodiceSA(codiceSA);
 						this.tecniciMapper.insertTecnico(fornserv.getRup());
 					}
 					fornserv.setCodiceRup(codiceRup);
@@ -255,13 +274,7 @@ public class ProgrammiManager {
 		//inserisco flusso
 		FlussoEntry flusso = new FlussoEntry();
 		if (tipoInstallazione().equals(new Long(3))) {
-			Long idFlusso = this.getNextId("W9FLUSSI");
-			//Integer i = this.sqlMapper.execute("SELECT chiave FROM W_GENCHIAVI WHERE TABELLA='W9FLUSSI'");
-			//Long idFlusso = new Long(1);
-		    //if (i != null) {
-		    //	idFlusso = new Long(i) + 1;
-		    //}
-		    //this.sqlMapper.execute("UPDATE W_GENCHIAVI SET CHIAVE=CHIAVE+1 WHERE TABELLA='W9FLUSSI'");
+			Long idFlusso = this.wgenChiaviManager.getNextId("W9FLUSSI");
 		    flusso.setId(idFlusso);
 		}
 	    Long key03 = new Long(991);
@@ -339,20 +352,26 @@ public class ProgrammiManager {
 			}
 			programma.setContri(contri);
 			//ricavo l'id univoco della pubblicazione
-			Long idRicevuto = this.getNextId("W9PUBBLICAZIONI_GEN");
+			Long idRicevuto = this.wgenChiaviManager.getNextId("W9PUBBLICAZIONI_GEN");
 			logger.info("PubblicaLavori idRicevuto = " + idRicevuto);
-			//i = this.sqlMapper.execute("SELECT chiave FROM W_GENCHIAVI WHERE TABELLA='W9PUBBLICAZIONI_GEN'");
 			risultato.setId(idRicevuto);
 			programma.setIdRicevuto(idRicevuto);
-			//this.sqlMapper.execute("UPDATE W_GENCHIAVI SET CHIAVE=CHIAVE+1 WHERE TABELLA='W9PUBBLICAZIONI_GEN'");
+			if (programma.getAnno() <= 2023) {
 			this.programmiMapper.pubblicaProgrammaLavori(programma);
+		} else {
+				this.programmiMapper.pubblicaProgrammaLavoriNorma3(programma);
+			}
 		} else {
 			tipoInvio = new Long(2);
 			//aggiorno il programma
 			//ricavo l'id del programma 
 			Integer i = this.sqlMapper.execute("SELECT CONTRI FROM PIATRI WHERE ID_GENERATO=" + programma.getIdRicevuto());
 			programma.setContri(new Long(i));
-			this.programmiMapper.modificaPubblicazioneProgrammaLavori(programma);
+			if (programma.getAnno() <= 2023) {
+				this.programmiMapper.modificaPubblicazioneProgrammaLavori(programma);
+			} else {
+				this.programmiMapper.modificaPubblicazioneProgrammaLavoriNorma3(programma);
+			}
 			risultato.setId(programma.getIdRicevuto());
 			logger.info("PubblicaLavori update idRicevuto = " + programma.getIdRicevuto());
 			//cancello le eventuali tabelle collegate
@@ -403,6 +422,7 @@ public class ProgrammiManager {
 						//il rup non esiste lo creo
 						codiceRup = this.calcolaCodificaAutomatica("TECNI", "CODTEC");	//Autogenero un codice per il tecnico
 						intervento.getRup().setCodice(codiceRup);
+						intervento.getRup().setCodiceSA(codiceSA);
 						this.tecniciMapper.insertTecnico(intervento.getRup());
 					}
 					intervento.setCodiceRup(codiceRup);
@@ -435,13 +455,7 @@ public class ProgrammiManager {
 		//inserisco flusso
 		FlussoEntry flusso = new FlussoEntry();
 		if (tipoInstallazione().equals(new Long(3))) {
-			Long idFlusso = this.getNextId("W9FLUSSI");
-			//Integer i = this.sqlMapper.execute("SELECT chiave FROM W_GENCHIAVI WHERE TABELLA='W9FLUSSI'");
-			//Long idFlusso = new Long(1);
-		    //if (i != null) {
-		    //	idFlusso = new Long(i) + 1;
-		    //}
-		    //this.sqlMapper.execute("UPDATE W_GENCHIAVI SET CHIAVE=CHIAVE+1 WHERE TABELLA='W9FLUSSI'");
+			Long idFlusso = this.wgenChiaviManager.getNextId("W9FLUSSI");
 		    flusso.setId(idFlusso);
 		}
 	    Long key03 = new Long(982);
@@ -519,20 +533,28 @@ public class ProgrammiManager {
 			}
 			programma.setContri(contri);
 			//ricavo l'id univoco della pubblicazione
-			Long idRicevuto = this.getNextId("W9PUBBLICAZIONI_GEN");
+			Long idRicevuto = this.wgenChiaviManager.getNextId("W9PUBBLICAZIONI_GEN");
 			logger.info("PubblicaFornitureServizi idRicevuto = " + idRicevuto);
 			//i = this.sqlMapper.execute("SELECT chiave FROM W_GENCHIAVI WHERE TABELLA='W9PUBBLICAZIONI_GEN'");
 			risultato.setId(idRicevuto);
 			programma.setIdRicevuto(idRicevuto);
 			//this.sqlMapper.execute("UPDATE W_GENCHIAVI SET CHIAVE=CHIAVE+1 WHERE TABELLA='W9PUBBLICAZIONI_GEN'");
+			if (programma.getAnno() <= 2023) {
 			this.programmiMapper.pubblicaProgrammaFornitureServizi(programma);
+		} else {
+				this.programmiMapper.pubblicaProgrammaFornitureServiziNorma3(programma);
+			}
 		} else {
 			tipoInvio = new Long(2);
 			//aggiorno il programma
 			//ricavo l'id del programma 
 			Integer i = this.sqlMapper.execute("SELECT CONTRI FROM PIATRI WHERE ID_GENERATO=" + programma.getIdRicevuto());
 			programma.setContri(new Long(i));
+			if (programma.getAnno() <= 2023) {
 			this.programmiMapper.modificaPubblicazioneProgrammaFornitureServizi(programma);
+			} else {
+				this.programmiMapper.modificaPubblicazioneProgrammaFornitureServiziNorma3(programma);
+			}
 			risultato.setId(programma.getIdRicevuto());
 			logger.info("PubblicaFornitureServizi update idRicevuto = " + programma.getIdRicevuto());
 			//cancello le eventuali tabelle collegate
@@ -576,13 +598,7 @@ public class ProgrammiManager {
 		//inserisco flusso
 		FlussoEntry flusso = new FlussoEntry();
 		if (tipoInstallazione().equals(new Long(3))) {
-			Long idFlusso = this.getNextId("W9FLUSSI");
-			//Integer i = this.sqlMapper.execute("SELECT chiave FROM W_GENCHIAVI WHERE TABELLA='W9FLUSSI'");
-			//Long idFlusso = new Long(1);
-		    //if (i != null) {
-		    //	idFlusso = new Long(i) + 1;
-		    //}
-		    //this.sqlMapper.execute("UPDATE W_GENCHIAVI SET CHIAVE=CHIAVE+1 WHERE TABELLA='W9FLUSSI'");
+			Long idFlusso = this.wgenChiaviManager.getNextId("W9FLUSSI");
 		    flusso.setId(idFlusso);
 		}
 	    Long key03 = new Long(981);
@@ -731,20 +747,10 @@ public class ProgrammiManager {
 	private Long insertInboxOutbox(FlussoEntry flusso, String modalitaInvio, String codiceUnitaOrganizzativa) throws Exception{
 		//Inserimento pubblicazione in W9Inbox
 		//ricavo l'id univoco della pubblicazione
-		Long idComun = this.getNextId("W9INBOX");
-		//Integer i = this.sqlMapper.execute("SELECT chiave FROM W_GENCHIAVI WHERE TABELLA='W9INBOX'");
-		//Long idComun = new Long(1);
-	    //if (i != null) {
-	    //	idComun = new Long(i) + 1;
-	    //}
-	    //this.sqlMapper.execute("UPDATE W_GENCHIAVI SET CHIAVE=CHIAVE+1 WHERE TABELLA='W9INBOX'");
+		Long idComun = this.wgenChiaviManager.getNextId("W9INBOX");
 	    this.programmiMapper.insertInbox(idComun, new Date(), new Long(2), flusso.getJson());
 	    if (modalitaInvio.equals("2")) {
-	    	Integer i = this.sqlMapper.execute("SELECT MAX(IDCOMUN) FROM W9OUTBOX");
-		    Long idComunOut = new Long(1);
-		    if (i != null) {
-		    	idComunOut = new Long(i) + 1;
-		    }
+	    	Long idComunOut = this.wgenChiaviManager.getNextId("W9OUTBOX");
 		    this.programmiMapper.insertOutbox(idComunOut, flusso.getArea(), flusso.getKey01(), flusso.getKey02(), flusso.getKey03(), flusso.getKey04(), new Long(1), flusso.getCodiceFiscaleSA(), codiceUnitaOrganizzativa);
 	    }
 	    return idComun;
@@ -955,4 +961,138 @@ public class ProgrammiManager {
 			}
 			return codice;
 		}
+
+	  /** Procedura che crea il file PDF dei programmi triennali e lo memorizza nel DB
+	   * @param params params
+	   * @param request request
+	   * @throws GestoreException GestoreException
+	   */
+	  public void creaPdf(Long contri, String piatriId, Long idRicevuto, ServletContext request) throws Exception{
+		  logger.info("creaPdf");
+		  Connection jrConnection = null;
+		  try {
+			  String PROP_JRREPORT_SOURCE_DIR = "/WEB-INF/jrReport/Programmi/";
+			  String jrReportSourceDir = null;
+			  // Input stream del file sorgente
+			  InputStream inputStreamJrReport = null;
+			  jrReportSourceDir = request.getRealPath(PROP_JRREPORT_SOURCE_DIR) + "/";
+			  inputStreamJrReport = request.getResourceAsStream(PROP_JRREPORT_SOURCE_DIR + "report2.jasper");
+			  // Parametri
+			  HashMap<String, Object> jrParameters = new HashMap<String, Object>();
+			  jrParameters.put(JRParameter.REPORT_LOCALE, Locale.ITALIAN);
+			  jrParameters.put("SUBREPORT_DIR", jrReportSourceDir);
+			  jrParameters.put("COD_PIANOTRIEN", piatriId);
+			  //jrParameters.put("CONTRI", new Long(contri));
+			  // Connessione
+			  jrConnection = dataSource.getConnection();
+			  // Stampa del formulario
+			  JasperPrint jrPrint =  JasperFillManager.fillReport(inputStreamJrReport, jrParameters, jrConnection);
+			  // Output stream del risultato
+			  ByteArrayOutputStream baosJrReport = new ByteArrayOutputStream();
+			  JRExporter jrExporter = new JRPdfExporter();
+			  jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jrPrint);
+			  jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, baosJrReport);
+			  jrExporter.exportReport();
+			  inputStreamJrReport.close();
+			  baosJrReport.close();
+			  // Update di PIATRI per l'inserimento del file composto
+			  AllegatoEntry documento = new AllegatoEntry();
+			  documento.setFile(baosJrReport.toByteArray());
+			  documento.setNrDoc(idRicevuto);
+			  this.programmiMapper.setPdf(documento);
+			  logger.info("creaPdf terminato con successo");
+		  } catch (Exception e) {
+			  throw new Exception(e);
+		  } finally {
+			  try {
+				  if (jrConnection != null) {
+					  jrConnection.close();
+				  }
+			  } catch (SQLException e) {
+				  logger.error("Errore durante la chiusura della transazione durante la creazione del pdf ", e);
+			  }
+		  }
+	  }
+	  
+	  /**
+	   * Procedura che crea il file PDF dei programmi triennali secondo
+	   * l'ex DLgs. 50/2016 oppure secondo il Dlgs 36/2023 e lo memorizza nel DB
+	   * 
+	   * @param params params
+	   * @param request request
+	   * @throws GestoreException GestoreException
+	   */
+	  public void creaPdfNuovaNormativa(Long contri, String piatriId, Long tiprog, Long idRicevuto, ServletContext request) throws Exception{
+
+		  logger.info("creaPdfNuovaNormativa");
+		  
+		  int occorrenze = sqlMapper.count(" PIATRI WHERE CONTRI=" + contri.toString() + " and NORMA=3");
+		  
+		  Connection jrConnection = null;
+		  try {
+			  String PROP_JRREPORT_SOURCE_DIR = "/WEB-INF/jrReport/NuovaNormativa/";
+			  String jrReportSourceDir = null;
+			  // Input stream del file sorgente
+			  InputStream inputStreamJrReport = null;
+			  if (tiprog.equals(new Long(1))) {
+				  if (occorrenze == 0) {
+					  jrReportSourceDir = request.getRealPath(PROP_JRREPORT_SOURCE_DIR);
+					  inputStreamJrReport = request.getResourceAsStream(PROP_JRREPORT_SOURCE_DIR + "allegatoI.jasper");
+				  } else {
+					  jrReportSourceDir = request.getRealPath("/WEB-INF/jrReport/NuovaNormativa/norma3/");
+					  inputStreamJrReport = request.getResourceAsStream("/WEB-INF/jrReport/NuovaNormativa/norma3/allegatoI.jasper");
+				  }
+			  } else {
+				  if (occorrenze == 0) {
+					  jrReportSourceDir = request.getRealPath(PROP_JRREPORT_SOURCE_DIR);
+					  inputStreamJrReport = request.getResourceAsStream(PROP_JRREPORT_SOURCE_DIR + "allegatoII.jasper");
+					  
+					  logger.debug("creaPdfNuovaNormativa - jrReportSourceDir = ".concat(jrReportSourceDir));
+				      logger.debug("creaPdfNuovaNormativa - inputStreamJrReport = " + inputStreamJrReport.available());
+				  } else {
+					  jrReportSourceDir = request.getRealPath("/WEB-INF/jrReport/NuovaNormativa/norma3/");
+					  inputStreamJrReport = request.getResourceAsStream("/WEB-INF/jrReport/NuovaNormativa/norma3/allegatoII.jasper");
+					  
+					  logger.debug("creaPdfNuovaNormativa - jrReportSourceDir = ".concat(jrReportSourceDir));
+				      logger.debug("creaPdfNuovaNormativa - inputStreamJrReport = " + inputStreamJrReport.available());
+				  }
+			  }
+			  // Parametri
+			  HashMap<String, Object> jrParameters = new HashMap<String, Object>();
+			  jrParameters.put(JRParameter.REPORT_LOCALE, Locale.ITALIAN);
+			  jrParameters.put("SUBREPORT_DIR", jrReportSourceDir);
+			  jrParameters.put("COD_PIANOTRIEN", piatriId);
+			  // Connessione
+			  jrConnection = dataSource.getConnection();
+			  // Stampa del formulario
+			  JasperPrint jrPrint =  JasperFillManager.fillReport(inputStreamJrReport, jrParameters, jrConnection);
+			  // Output stream del risultato
+			  ByteArrayOutputStream baosJrReport = new ByteArrayOutputStream();
+			  JRExporter jrExporter = new JRPdfExporter();
+			  jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jrPrint);
+			  jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, baosJrReport);
+			  jrExporter.exportReport();
+
+			  inputStreamJrReport.close();
+			  baosJrReport.close();
+
+			  // Update di PIATRI per l'inserimento del file composto
+			  AllegatoEntry documento = new AllegatoEntry();
+			  documento.setFile(baosJrReport.toByteArray());
+			  documento.setNrDoc(idRicevuto);
+			  this.programmiMapper.setPdf(documento);
+			  logger.info("creaPdfNuovaNormativa terminato con successo");
+
+		  } catch (Exception e) {
+			  throw new Exception(e);
+		  } finally {
+			  try {
+				  if (jrConnection != null) {
+					  jrConnection.close();
+				  }
+			  } catch (SQLException e) {
+				  logger.error("Errore durante la chiusura della transazione durante la creazione del pdf ", e);
+			  }
+		  }
+	  }
 }

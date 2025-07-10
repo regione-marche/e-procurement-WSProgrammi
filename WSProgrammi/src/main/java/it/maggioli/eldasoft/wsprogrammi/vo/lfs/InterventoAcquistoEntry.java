@@ -47,7 +47,7 @@ public class InterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Anno iniziale del programma")
 	private Long anno;
 	
-	@ApiModelProperty(value="Annualità di riferimento dell'intervento/acquisto nel programma [1,2,3]")
+	@ApiModelProperty(value="Annualita' di riferimento dell'intervento/acquisto nel programma [1,2,3]")
 	private Long annualitaRiferimento;
 	
 	@ApiModelProperty(value = "Codice CUI")
@@ -74,7 +74,7 @@ public class InterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value = "Codice CPV")
 	private String cpv;
 	
-	@ApiModelProperty(value = "Flag che indica se l'intervento / acquisto è già associato ad un lavoro", hidden=true)
+	@ApiModelProperty(value = "Flag che indica se l'intervento / acquisto e' gia' associato ad un lavoro", hidden=true)
 	private String associato;
 	
 	public void setAnno(Long anno) {

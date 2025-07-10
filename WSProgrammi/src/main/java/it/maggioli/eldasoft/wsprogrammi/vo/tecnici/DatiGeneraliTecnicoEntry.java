@@ -55,7 +55,7 @@ public class DatiGeneraliTecnicoEntry implements Serializable {
 	private String nome;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@ApiModelProperty(value = "*Cognome e nome del tecnico")
+	@ApiModelProperty(value = "*Cognome e nome del tecnico", hidden = true)
 	@Size(max=161)
 	private String nomeCognome;
 	
@@ -68,7 +68,7 @@ public class DatiGeneraliTecnicoEntry implements Serializable {
 	private String civico;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@ApiModelProperty(value = "*Localita` di residenza")
+	@ApiModelProperty(value = "*Localita` di residenza", hidden=true)
 	@Size(max=32)
 	private String localita;
 	
@@ -85,12 +85,12 @@ public class DatiGeneraliTecnicoEntry implements Serializable {
 	private String luogoIstat;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@ApiModelProperty(value = "*Numero di telefono")
+	@ApiModelProperty(value = "*Numero di telefono", hidden = true)
 	@Size(max=50)
 	private String telefono;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@ApiModelProperty(value = "*FAX")
+	@ApiModelProperty(value = "*FAX", hidden=true)
 	@Size(max=20)
 	private String fax;
 	
@@ -99,7 +99,7 @@ public class DatiGeneraliTecnicoEntry implements Serializable {
 	private String cfPiva;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@ApiModelProperty(value = "*Indirizzo E-mail")
+	@ApiModelProperty(value = "*Indirizzo E-mail", hidden = true)
 	@Size(max=100)
 	private String mail;
 

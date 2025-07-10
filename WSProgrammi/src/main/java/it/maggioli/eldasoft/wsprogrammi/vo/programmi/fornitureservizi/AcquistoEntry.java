@@ -48,24 +48,31 @@ import org.apache.commons.lang3.StringUtils;
 		"nuovoAffidamento",
 		"risorseVincolatePerLegge1",
 		"risorseVincolatePerLegge2",
+		"risorseVincolatePerLegge3",
 		"risorseVincolatePerLeggeSucc",
 		"risorseMutuo1",
 		"risorseMutuo2",
+		"risorseMutuo3",
 		"risorseMutuoSucc",
 		"risorsePrivati1",
 		"risorsePrivati2",
+		"risorsePrivati3",
 		"risorsePrivatiSucc",
 		"risorseBilancio1",
 		"risorseBilancio2",
+		"risorseBilancio3",
 		"risorseBilancioSucc",
 		"risorseArt3_1",
 		"risorseArt3_2",
+		"risorseArt3_3",
 		"risorseArt3_Succ",
 		"risorseImmobili1",
 		"risorseImmobili2",
+		"risorseImmobili3",
 		"risorseImmobiliSucc",
 		"risorseAltro1",
 		"risorseAltro2",
+		"risorseAltro3",
 		"risorseAltroSucc",
 		"speseSostenute",
 		"tipologiaCapitalePrivato",
@@ -77,6 +84,7 @@ import org.apache.commons.lang3.StringUtils;
 		"codiceSoggettoDelegato",
 		"nomeSoggettoDelegato",
 		"variato",
+		"cigAccordoQuadro",
 		"note",
 		"direzioneGenerale",
 		"strutturaOperativa",
@@ -98,6 +106,7 @@ import org.apache.commons.lang3.StringUtils;
 		"importoTotMatRic",
 		"importoIva1",
 		"importoIva2",
+		"importoIva3",
 		"importoIvaSucc",
 		"coperturaFinanziaria",
 		"valutazione",
@@ -119,7 +128,7 @@ public class AcquistoEntry implements Serializable {
 	@ApiModelProperty(hidden=true)
 	private String codiceRup;
 	
-	@ApiModelProperty(value = "Numero intervento CUI (‘F’ + CodiceFiscale Stazione Appaltante(11 char) + anno (4 char) + progressivo (5 char))", required=true)
+	@ApiModelProperty(value = "Numero intervento CUI ('F' + CodiceFiscale Stazione Appaltante(11 char) + anno (4 char) + progressivo (5 char))", required=true)
 	@Size(max=25)
 	private String cui;
 	
@@ -135,7 +144,7 @@ public class AcquistoEntry implements Serializable {
 	@Size(max=2000)
 	private String descrizione;
 	
-	@ApiModelProperty(value = "Annualità di riferimento avvio procedura di affidamento (1°,2°,3° anno)",allowableValues="range[1, 3]",required=true)
+	@ApiModelProperty(value = "Annualita' di riferimento avvio procedura di affidamento (1°,2°,3° anno)",allowableValues="range[1, 3]",required=true)
 	private Long anno;
 	
 	@ApiModelProperty(value="Esente dalla richiesta CUP? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
@@ -165,13 +174,13 @@ public class AcquistoEntry implements Serializable {
 	@Size(max=20)
 	private String nuts;
 	
-	@ApiModelProperty(value="Quantità")
+	@ApiModelProperty(value="Quantita'")
 	private Double quantita;
 	
-	@ApiModelProperty(value="Unità di misura (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=UnitaMisura)")
+	@ApiModelProperty(value="Unita' di misura (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=UnitaMisura)")
 	private Long unitaMisura;
 	
-	@ApiModelProperty(value="Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)")
+	@ApiModelProperty(value="Livello di Priorita' (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)")
 	private Long priorita;
 	
 	@ApiModelProperty(value="Lotto funzionale? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
@@ -191,7 +200,10 @@ public class AcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Secondo anno")
 	private Double risorseVincolatePerLegge2;
 	
-	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Annualità successive")
+	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Terzo anno")
+	private Double risorseVincolatePerLegge3;
+	
+	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Annualita' successive")
 	private Double risorseVincolatePerLeggeSucc;
 	
 	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Primo anno")
@@ -200,7 +212,10 @@ public class AcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Secondo anno")
 	private Double risorseMutuo2;
 	
-	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Annualità successive")
+	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Terzo anno")
+	private Double risorseMutuo3;
+	
+	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Annualita' successive")
 	private Double risorseMutuoSucc;
 	
 	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Primo anno")
@@ -209,7 +224,10 @@ public class AcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Secondo anno")
 	private Double risorsePrivati2;
 	
-	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Annualità successive")
+	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Terzo anno")
+	private Double risorsePrivati3;
+	
+	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Annualita' successive")
 	private Double risorsePrivatiSucc;
 	
 	@ApiModelProperty(value="Stanziamenti di bilancio - Primo anno")
@@ -218,7 +236,10 @@ public class AcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Stanziamenti di bilancio - Secondo anno")
 	private Double risorseBilancio2;
 	
-	@ApiModelProperty(value="Stanziamenti di bilancio - Annualità successive")
+	@ApiModelProperty(value="Stanziamenti di bilancio - Terzo anno")
+	private Double risorseBilancio3;
+	
+	@ApiModelProperty(value="Stanziamenti di bilancio - Annualita' successive")
 	private Double risorseBilancioSucc;
 	
 	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Primo anno")
@@ -227,7 +248,10 @@ public class AcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Secondo anno")
 	private Double risorseArt3_2;
 	
-	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Annualità successive")
+	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Terzo anno")
+	private Double risorseArt3_3;
+	
+	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Annualita' successive")
 	private Double risorseArt3_Succ;
 	
 	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Primo anno")
@@ -236,7 +260,10 @@ public class AcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Secondo anno")
 	private Double risorseImmobili2;
 	
-	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Annualità successive")
+	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Terzo anno")
+	private Double risorseImmobili3;
+	
+	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Annualita' successive")
 	private Double risorseImmobiliSucc;
 	
 	@ApiModelProperty(value="Altra tipologia - Primo anno")
@@ -245,10 +272,13 @@ public class AcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Altra tipologia - Secondo anno")
 	private Double risorseAltro2;
 	
-	@ApiModelProperty(value="Altra tipologia - Annualità successive")
+	@ApiModelProperty(value="Altra tipologia - Terzo anno")
+	private Double risorseAltro3;
+	
+	@ApiModelProperty(value="Altra tipologia - Annualita' successive")
 	private Double risorseAltroSucc;
 
-	@ApiModelProperty(value="Spese già sostenute")
+	@ApiModelProperty(value="Spese gia' sostenute")
 	private Double speseSostenute;
 	
 	@ApiModelProperty(value="Tipologia apporto di capitale privato (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=TipologiaCapitalePrivato)")
@@ -278,6 +308,10 @@ public class AcquistoEntry implements Serializable {
 	@ApiModelProperty(value = "Denominazione Centrale di Committenza o Soggetto Aggregatore")
 	@Size(max=160)
 	private String nomeSoggettoDelegato;
+	
+	@ApiModelProperty(value = "CIG accordo quadro/convenzione")
+	@Size(max=10)
+	private String cigAccordoQuadro;
 	
 	@ApiModelProperty(value="Intervento variato a seguito di modifica programma (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=VariatoAcquisti)")
 	private Long variato;
@@ -355,7 +389,10 @@ public class AcquistoEntry implements Serializable {
 	@ApiModelProperty(value="[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA - Secondo anno")
 	private Double importoIva2;
 	
-	@ApiModelProperty(value="[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA - Annualità successive")
+	@ApiModelProperty(value="[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA - Terzo anno")
+	private Double importoIva3;
+	
+	@ApiModelProperty(value="[Attributo aggiuntivo, previsto in ambiti regionali] Importo IVA - Annualita' successive")
 	private Double importoIvaSucc;
 	
 	@ApiModelProperty(value="[Attributo aggiuntivo, previsto in ambiti regionali] L'acquisto ha copertura finanziaria? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
@@ -705,6 +742,14 @@ public class AcquistoEntry implements Serializable {
 		return nomeSoggettoDelegato;
 	}
 
+	public void setCigAccordoQuadro(String cigAccordoQuadro) {
+		this.cigAccordoQuadro = StringUtils.stripToNull(cigAccordoQuadro);
+	}
+
+	public String getCigAccordoQuadro() {
+		return cigAccordoQuadro;
+	}
+
 	public void setVariato(Long variato) {
 		this.variato = variato;
 	}
@@ -990,11 +1035,76 @@ public class AcquistoEntry implements Serializable {
 		return valutazione;
 	}
 
+	public Double getRisorseVincolatePerLegge3() {
+		return risorseVincolatePerLegge3;
+	}
+
+	public void setRisorseVincolatePerLegge3(Double risorseVincolatePerLegge3) {
+		this.risorseVincolatePerLegge3 = risorseVincolatePerLegge3;
+	}
+
+	public Double getRisorseMutuo3() {
+		return risorseMutuo3;
+	}
+
+	public void setRisorseMutuo3(Double risorseMutuo3) {
+		this.risorseMutuo3 = risorseMutuo3;
+	}
+
+	public Double getRisorsePrivati3() {
+		return risorsePrivati3;
+	}
+
+	public void setRisorsePrivati3(Double risorsePrivati3) {
+		this.risorsePrivati3 = risorsePrivati3;
+	}
+
+	public Double getRisorseBilancio3() {
+		return risorseBilancio3;
+	}
+
+	public void setRisorseBilancio3(Double risorseBilancio3) {
+		this.risorseBilancio3 = risorseBilancio3;
+	}
+
+	public Double getRisorseArt3_3() {
+		return risorseArt3_3;
+	}
+
+	public void setRisorseArt3_3(Double risorseArt3_3) {
+		this.risorseArt3_3 = risorseArt3_3;
+	}
+
+	public Double getRisorseImmobili3() {
+		return risorseImmobili3;
+	}
+
+	public void setRisorseImmobili3(Double risorseImmobili3) {
+		this.risorseImmobili3 = risorseImmobili3;
+	}
+
+	public Double getRisorseAltro3() {
+		return risorseAltro3;
+	}
+
+	public void setRisorseAltro3(Double risorseAltro3) {
+		this.risorseAltro3 = risorseAltro3;
+	}
+
+	public Double getImportoIva3() {
+		return importoIva3;
+	}
+
+	public void setImportoIva3(Double importoIva3) {
+		this.importoIva3 = importoIva3;
+	}
+
 	@XmlTransient
 	public double getImportoCapitalePrivato() {
 		double totale = 0;
 		totale += (risorsePrivati1 == null)?0:risorsePrivati1;
 		totale += (risorsePrivati2 == null)?0:risorsePrivati2;
+		totale += (risorsePrivati3 == null)?0:risorsePrivati3;
 		totale += (risorsePrivatiSucc == null)?0:risorsePrivatiSucc;
 		return totale;
 	}
@@ -1004,30 +1114,37 @@ public class AcquistoEntry implements Serializable {
 		double totale = 0;
 		totale += (risorseAltro1 == null)?0:risorseAltro1;
 		totale += (risorseAltro2 == null)?0:risorseAltro2;
+		totale += (risorseAltro3 == null)?0:risorseAltro3;
 		totale += (risorseAltroSucc == null)?0:risorseAltroSucc;
 		
 		totale += (risorseArt3_1 == null)?0:risorseArt3_1;
 		totale += (risorseArt3_2 == null)?0:risorseArt3_2;
+		totale += (risorseArt3_3 == null)?0:risorseArt3_3;
 		totale += (risorseArt3_Succ == null)?0:risorseArt3_Succ;
 		
 		totale += (risorseBilancio1 == null)?0:risorseBilancio1;
 		totale += (risorseBilancio2 == null)?0:risorseBilancio2;
+		totale += (risorseBilancio3 == null)?0:risorseBilancio3;
 		totale += (risorseBilancioSucc == null)?0:risorseBilancioSucc;
 		
 		totale += (risorseImmobili1 == null)?0:risorseImmobili1;
 		totale += (risorseImmobili2 == null)?0:risorseImmobili2;
+		totale += (risorseImmobili3 == null)?0:risorseImmobili3;
 		totale += (risorseImmobiliSucc == null)?0:risorseImmobiliSucc;
 		
 		totale += (risorseMutuo1 == null)?0:risorseMutuo1;
 		totale += (risorseMutuo2 == null)?0:risorseMutuo2;
+		totale += (risorseMutuo3 == null)?0:risorseMutuo3;
 		totale += (risorseMutuoSucc == null)?0:risorseMutuoSucc;
 		
 		totale += (risorsePrivati1 == null)?0:risorsePrivati1;
 		totale += (risorsePrivati2 == null)?0:risorsePrivati2;
+		totale += (risorsePrivati3 == null)?0:risorsePrivati3;
 		totale += (risorsePrivatiSucc == null)?0:risorsePrivatiSucc;
 		
 		totale += (risorseVincolatePerLegge1 == null)?0:risorseVincolatePerLegge1;
 		totale += (risorseVincolatePerLegge2 == null)?0:risorseVincolatePerLegge2;
+		totale += (risorseVincolatePerLegge3 == null)?0:risorseVincolatePerLegge3;
 		totale += (risorseVincolatePerLeggeSucc == null)?0:risorseVincolatePerLeggeSucc;
 		
 		totale += (speseSostenute == null)?0:speseSostenute;

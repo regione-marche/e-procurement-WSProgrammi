@@ -113,7 +113,7 @@ public class ValidateManager {
 				//se esiste verifico che idclient sia uguale
 				i = sqlMapper.count("PIATRI WHERE ID_GENERATO=" + programma.getIdRicevuto() + " and ID_CLIENT='" + programma.getClientId() + "'");
 				if (i == 0){
-					ValidateEntry item = new ValidateEntry("idRicevuto", "L'id programma indicato esiste già per un'altra utenza");
+					ValidateEntry item = new ValidateEntry("idRicevuto", "L'id programma indicato esiste gia' per un'altra utenza");
 					controlli.add(item);
 				}
 			}
@@ -131,7 +131,7 @@ public class ValidateManager {
 			}
 			int i = sqlMapper.count(sqlProgrammaGiaEsiste);
 			if (i > 0){
-				ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + "esiste già nella banca dati e non è possibile proseguire con l'aggiornamento");
+				ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + " esiste gia' nella banca dati e non e' possibile proseguire con l'aggiornamento");
 				controlli.add(item);
 			}*/
 		} else {
@@ -146,7 +146,7 @@ public class ValidateManager {
 			} else {
 				i = sqlMapper.count("UFFINT WHERE CFEIN='" + programma.getCodiceFiscaleSA() + "' and (CODEIN_UO is null or CODEIN_UO='')");
 			}
-			if (i == 0){
+			if (i == 0) {
 				ValidateEntry item = new ValidateEntry("codiceFiscaleSA", "La stazione appaltante indicata non esiste nell'archivio di destinazione");
 				controlli.add(item);
 			} else if (i > 1){
@@ -154,7 +154,7 @@ public class ValidateManager {
 				controlli.add(item);
 			} else {
 				//controllo solo in inserimento
-				//se esiste la stazione appaltante e la gara deve essere ancora inserita verifico se c'è l'aasociazione nell'usrein
+				//se esiste la stazione appaltante e la gara deve essere ancora inserita verifico se c'e' l'associazione nell'usrein
 				//oppure l'tente è "Amministrazione parametri di sistema"
 				//ricavo il codice della Stazione appaltante
 				String codiceSA = "";
@@ -176,7 +176,7 @@ public class ValidateManager {
 				}
 				int j = sqlMapper.count(sqlProgrammaGiaEsiste);
 				if (j > 0){
-					ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + "esiste già nella banca dati e non è possibile proseguire con l'aggiornamento");
+					ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + " esiste gia' nella banca dati e non e' possibile proseguire con l'aggiornamento");
 					controlli.add(item);
 				}
 			}
@@ -622,7 +622,7 @@ public class ValidateManager {
 				//se esiste verifico che idclient sia uguale
 				i = sqlMapper.count("PIATRI WHERE ID_GENERATO=" + programma.getIdRicevuto() + " and ID_CLIENT='" + programma.getClientId() + "'");
 				if (i == 0){
-					ValidateEntry item = new ValidateEntry("idRicevuto", "L'id programma indicato esiste già per un'altra utenza");
+					ValidateEntry item = new ValidateEntry("idRicevuto", "L'id programma indicato esiste gia' per un'altra utenza");
 					controlli.add(item);
 				}
 			}
@@ -640,7 +640,7 @@ public class ValidateManager {
 			}
 			int i = sqlMapper.count(sqlProgrammaGiaEsiste);
 			if (i > 0){
-				ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + "esiste già nella banca dati e non è possibile proseguire con l'aggiornamento");
+				ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + " esiste gia' nella banca dati e non e' possibile proseguire con l'aggiornamento");
 				controlli.add(item);
 			}*/
 		} else {
@@ -659,11 +659,11 @@ public class ValidateManager {
 				ValidateEntry item = new ValidateEntry("codiceFiscaleSA", "La stazione appaltante indicata non esiste nell'archivio di destinazione");
 				controlli.add(item);
 			} else if (i > 1){
-				ValidateEntry item = new ValidateEntry("codiceFiscaleSA", "Esistono pìu stazioni appaltanti con lo stesso codice fiscale. Contattare l'amministratore");
+				ValidateEntry item = new ValidateEntry("codiceFiscaleSA", "Esistono più stazioni appaltanti con lo stesso codice fiscale. Contattare l'amministratore");
 				controlli.add(item);
 			} else {
 				//controllo solo in inserimento
-				//se esiste la stazione appaltante e la gara deve essere ancora inserita verifico se c'è l'aasociazione nell'usrein
+				//se esiste la stazione appaltante e la gara deve essere ancora inserita verifico se c'è l'associazione nell'usrein
 				//oppure l'tente è "Amministrazione parametri di sistema"
 				//ricavo il codice della Stazione appaltante
 				String codiceSA = "";
@@ -685,7 +685,7 @@ public class ValidateManager {
 				}
 				int j = sqlMapper.count(sqlProgrammaGiaEsiste);
 				if (j > 0){
-					ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + "esiste già nella banca dati e non è possibile proseguire con l'aggiornamento");
+					ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + " esiste gia' nella banca dati e non e' possibile proseguire con l'aggiornamento");
 					controlli.add(item);
 				}
 			}
@@ -1210,7 +1210,7 @@ public class ValidateManager {
 			}
 			int i = sqlMapper.count(sqlProgrammaGiaEsiste);
 			if (i > 0){
-				ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + "esiste già nella banca dati e non è possibile proseguire con l'aggiornamento");
+				ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + " esiste gia' nella banca dati e non e' possibile proseguire con l'aggiornamento");
 				controlli.add(item);
 			}*/
 		} else {
@@ -1229,11 +1229,11 @@ public class ValidateManager {
 				ValidateEntry item = new ValidateEntry("codiceFiscaleSA", "La stazione appaltante indicata non esiste nell'archivio di destinazione");
 				controlli.add(item);
 			} else if (i > 1){
-				ValidateEntry item = new ValidateEntry("codiceFiscaleSA", "Esistono pìu stazioni appaltanti con lo stesso codice fiscale. Contattare l'amministratore");
+				ValidateEntry item = new ValidateEntry("codiceFiscaleSA", "Esistono più stazioni appaltanti con lo stesso codice fiscale. Contattare l'amministratore");
 				controlli.add(item);
 			} else {
 				//controllo solo in inserimento
-				//se esiste la stazione appaltante e la gara deve essere ancora inserita verifico se c'è l'aasociazione nell'usrein
+				//se esiste la stazione appaltante e la gara deve essere ancora inserita verifico se c'è l'associazione nell'usrein
 				//oppure l'tente è "Amministrazione parametri di sistema"
 				//ricavo il codice della Stazione appaltante
 				String codiceSA = "";
@@ -1255,7 +1255,7 @@ public class ValidateManager {
 				}
 				int j = sqlMapper.count(sqlProgrammaGiaEsiste);
 				if (j > 0){
-					ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + "esiste già nella banca dati e non è possibile proseguire con l'aggiornamento");
+					ValidateEntry item = new ValidateEntry("id", "Il programma con id " + programma.getId() + " esiste gia' nella banca dati e non e' possibile proseguire con l'aggiornamento");
 					controlli.add(item);
 				}
 			}
@@ -1314,7 +1314,7 @@ public class ValidateManager {
 		if(programma.getAcquisti() != null) {
 			for(AcquistoEntry acquisto:programma.getAcquisti()) {
 				acquisto.setConint(new Long(conint));
-				this.validateAcquisto(acquisto, controlli);
+				this.validateAcquisto(acquisto, programma.getAnno(), controlli);
 				conint++;
 			}
 		}
@@ -1330,7 +1330,7 @@ public class ValidateManager {
 		}
 	}
 
-	private void validateAcquisto(AcquistoEntry acquisto, List<ValidateEntry> controlli) throws IOException {
+	private void validateAcquisto(AcquistoEntry acquisto, Long annoInizioPiano, List<ValidateEntry> controlli) throws IOException {
 		
 		if (acquisto.getCui() == null) {
 			ValidateEntry item = new ValidateEntry("acquisto nr " + acquisto.getConint() + ".Cui", "Valorizzare il campo");
@@ -1361,11 +1361,21 @@ public class ValidateManager {
 		if (acquisto.getAnno() == null) {
 			ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".Anno", "Valorizzare il campo");
 			controlli.add(item);
-		} else if (acquisto.getAnno() < 1 || acquisto.getAnno() > 3) {
-			ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".Anno", "Valore non valido");
-			controlli.add(item);
+		} else {
+			if (annoInizioPiano != null) {
+				if (annoInizioPiano <= 2023) {
+					if (acquisto.getAnno() < 1 || acquisto.getAnno() > 3) {
+						ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".Anno", "Valore non valido");
+						controlli.add(item);
+					}
+				} else {
+					if (acquisto.getAnno() < 1 || acquisto.getAnno() > 4) {
+						ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".Anno", "Valore non valido");
+						controlli.add(item);
+					}
+				}
+			}
 		}
-		
 		if (acquisto.getCodiceInterno() != null && acquisto.getCodiceInterno().length()>20) {
 			ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".CodiceInterno", "Il numero di caratteri eccede la lunghezza massima");
 			controlli.add(item);
@@ -1441,6 +1451,37 @@ public class ValidateManager {
 			controlli.add(item);
 		}
 		
+		if ((acquisto.getRisorseMutuo3() != null && acquisto.getRisorseMutuo3() > 0) && annoInizioPiano < 2024) {
+			ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".RisorseMutuo3", "Puo' essere valorizzato se programma.anno>=2024");
+			controlli.add(item);
+		}
+
+		if ((acquisto.getRisorsePrivati3() != null && acquisto.getRisorsePrivati3() > 0) && annoInizioPiano < 2024) {
+			ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".RisorsePrivati3", "Puo' essere valorizzato se programma.anno>=2024");
+			controlli.add(item);
+		}
+
+		if ((acquisto.getRisorseBilancio3() != null && acquisto.getRisorseBilancio3() > 0) && annoInizioPiano < 2024) {
+			ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".RisorseBilancio3", "Puo' essere valorizzato se programma.anno>=2024");
+			controlli.add(item);
+		}
+		
+		if ((acquisto.getRisorseArt3_3() != null && acquisto.getRisorseArt3_3() > 0) && annoInizioPiano < 2024) {
+			ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".RisorseArt3_3", "Puo' essere valorizzato se programma.anno>=2024");
+			controlli.add(item);
+		}
+		
+		if ((acquisto.getRisorseImmobili3() != null && acquisto.getRisorseImmobili3() > 0) && annoInizioPiano < 2024) {
+			ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".RisorseImmobili3", "Puo' essere valorizzato se programma.anno>=2024");
+			controlli.add(item);
+		}
+
+		if ((acquisto.getRisorseAltro3() != null && acquisto.getRisorseAltro3() > 0) && annoInizioPiano < 2024) {
+			ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".RisorseAltro3", "Puo' essere valorizzato se programma.anno>=2024");
+			controlli.add(item);
+		}
+
+		
 		if (acquisto.getTipologiaCapitalePrivato() != null) {
 			TabellatoEntry riga = this.tabellatiMapper.getValore3("PTx08", acquisto.getTipologiaCapitalePrivato());
 			if (riga == null) {
@@ -1470,6 +1511,11 @@ public class ValidateManager {
 				ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".Variato", "Valore non valido");
 				controlli.add(item);
 			}
+		}
+		
+		if ((acquisto.getImportoIva3() != null && acquisto.getImportoIva3()  > 0) && annoInizioPiano < 2024) {
+			ValidateEntry item = new ValidateEntry("acquisto " + acquisto.getCui() + ".ImportoIva3", "Puo' essere valorizzato se programma.anno>=2024");
+			controlli.add(item);
 		}
 		
 		if (acquisto.getNote() != null && acquisto.getNote().length()>2000) {
@@ -2211,7 +2257,9 @@ public class ValidateManager {
 					break;
 				case 20:
 					//Dati adozione / approvazione
-					if (programmaLavori.getDataApprovazione() == null && programmaLavori.getDataAdozione() == null) {
+					if ((programmaLavori.getDataApprovazione() == null && programmaLavori.getDataAdozione() == null)
+							&& ((programmaLavori.getInterventi() != null &&  programmaLavori.getInterventi().size() > 0)||
+									(programmaLavori.getOpereIncompiute() == null || programmaLavori.getOpereIncompiute().size() == 0))){
 						condizioneVerificata = true;
 					}
 					break;

@@ -38,7 +38,7 @@ import org.springframework.stereotype.Component;
  */
 @Path("/IntegrazioneLFS")
 @Component
-@Api(value = "/IntegrazioneLFS")
+@Api(value = "/IntegrazioneLFS", hidden = true)
 public class IntegrazioneLFSRestService extends BaseRestService{
 
 	/** Logger di classe. */
@@ -79,7 +79,7 @@ public class IntegrazioneLFSRestService extends BaseRestService{
 	@GET
 	@Path("/LeggiInterventoAcquisto")
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(nickname = "IntegrazioneLFSRestService.leggiInterventoAcquisto", value = "Estrae l'elenco interventi/acquisti che soddisfano i filtri passati", response = InterventiAcquistiResult.class)
+	@ApiOperation(nickname = "IntegrazioneLFSRestService.leggiInterventoAcquisto", hidden=true, value = "Estrae l'elenco interventi/acquisti che soddisfano i filtri passati", response = InterventiAcquistiResult.class)
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "Operazione effettuata con successo"),
 			@ApiResponse(code = 400, message = "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"),
 			@ApiResponse(code = 500, message = "Errori durante l'esecuzione dell'operazione (si veda l'attributo error della risposta)") })
@@ -146,7 +146,7 @@ public class IntegrazioneLFSRestService extends BaseRestService{
 	@Path("/CollegaInterventoAcquisto")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(nickname = "IntegrazioneLFSRestService.collegaInterventoAcquisto", value = "Associa l'intervento indicato dal codiceCUI con il lavoro indicato dal codiceLavoro", response = EsitoResult.class)
+	@ApiOperation(nickname = "IntegrazioneLFSRestService.collegaInterventoAcquisto", hidden=true, value = "Associa l'intervento indicato dal codiceCUI con il lavoro indicato dal codiceLavoro", response = EsitoResult.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Operazione effettuata con successo"),
 			@ApiResponse(code = 400, message = "Controlli falliti sui parametri in input (si veda l'attributo messaggio della risposta)"),
@@ -231,10 +231,10 @@ public class IntegrazioneLFSRestService extends BaseRestService{
 	@GET
 	@Path("/DettaglioInterventoAcquisto")
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(nickname = "IntegrazioneLFSRestService.dettaglioInterventoAcquisto", value = "Estrae il dettaglio dell'intervento / acquisto associato al CUI indicato", response = DettaglioInterventoAcquistoResult.class)
+	@ApiOperation(nickname = "IntegrazioneLFSRestService.dettaglioInterventoAcquisto", hidden=true, value = "Estrae il dettaglio dell'intervento / acquisto associato al CUI indicato", response = DettaglioInterventoAcquistoResult.class)
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "Operazione effettuata con successo"),
 			@ApiResponse(code = 400, message = "Controlli falliti sui parametri in input (si veda l'attributo error della risposta)"),
-			@ApiResponse(code = 404, message = "Il CUI richiesto non è stato trovato (si veda l'attributo error della risposta)"),
+			@ApiResponse(code = 404, message = "Il CUI richiesto non e' stato trovato (si veda l'attributo error della risposta)"),
 			@ApiResponse(code = 500, message = "Errori durante l'esecuzione dell'operazione (si veda l'attributo error della risposta)") })
 			public Response dettaglioInterventoAcquisto(
 					@ApiParam(value = "Codice CUI dell'intervento/acquisto") @QueryParam("codiceCUI") String codiceCUI, 

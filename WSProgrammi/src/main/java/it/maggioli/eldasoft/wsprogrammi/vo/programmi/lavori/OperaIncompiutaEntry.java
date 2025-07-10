@@ -100,7 +100,7 @@ public class OperaIncompiutaEntry implements Serializable {
 	@ApiModelProperty(value="Percentuale avanzamento lavori %")
 	private Double percentualeAvanzamento;
 		
-	@ApiModelProperty(value="Causa per la quale l'opera è incompiuta (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Causa)")
+	@ApiModelProperty(value="Causa per la quale l'opera e' incompiuta (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Causa)")
 	@Size(max=5)
 	private String causa;
 		  
@@ -112,7 +112,7 @@ public class OperaIncompiutaEntry implements Serializable {
 	@Size(max=1)
 	private String infrastruttura;
 		  
-	@ApiModelProperty(value="Crea discontinuità nella rete? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
+	@ApiModelProperty(value="Crea discontinuita' nella rete? (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=SN)")
 	@Size(max=1)
 	private String discontinuitaRete;
 	

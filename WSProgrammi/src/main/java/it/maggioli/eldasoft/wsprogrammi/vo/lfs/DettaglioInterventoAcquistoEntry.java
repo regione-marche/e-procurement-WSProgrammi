@@ -83,7 +83,7 @@ public class DettaglioInterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value = "Anno del programma")
 	private Long annoProgramma;
 	
-	@ApiModelProperty(value = "Annualità di riferimento dell'intervento / acquisto")
+	@ApiModelProperty(value = "Annualita' di riferimento dell'intervento / acquisto")
 	private Long annualita;
 	
 	@ApiModelProperty(value="Importo totale")
@@ -98,7 +98,7 @@ public class DettaglioInterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Localizzazione - NUTS")
 	private String nuts;
 	
-	@ApiModelProperty(value="Livello di Priorità (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)")
+	@ApiModelProperty(value="Livello di Priorita' (/WSTabelleDiContesto/rest/Tabellati/Valori?cod=Priorita)")
 	private Long priorita;
 	
 	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Primo anno")
@@ -110,7 +110,7 @@ public class DettaglioInterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Terzo anno")
 	private Double risorseVincolatePerLegge3;
 	
-	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Annualità successive")
+	@ApiModelProperty(value="Risorse derivanti da entrate aventi destinazione vincolata per legge - Annualita' successive")
 	private Double risorseVincolatePerLeggeSucc;
 	
 	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Primo anno")
@@ -122,7 +122,7 @@ public class DettaglioInterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Terzo anno")
 	private Double risorseMutuo3;
 	
-	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Annualità successive")
+	@ApiModelProperty(value="Risorse derivanti da entrate acquisite mediante contrazione di mutuo - Annualita' successive")
 	private Double risorseMutuoSucc;
 	
 	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Primo anno")
@@ -134,7 +134,7 @@ public class DettaglioInterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Terzo anno")
 	private Double risorsePrivati3;
 	
-	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Annualità successive")
+	@ApiModelProperty(value="Risorse acquisite mediante apporti di capitale privato - Annualita' successive")
 	private Double risorsePrivatiSucc;
 	
 	@ApiModelProperty(value="Stanziamenti di bilancio - Primo anno")
@@ -146,7 +146,7 @@ public class DettaglioInterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Stanziamenti di bilancio - Terzo anno")
 	private Double risorseBilancio3;
 	
-	@ApiModelProperty(value="Stanziamenti di bilancio - Annualità successive")
+	@ApiModelProperty(value="Stanziamenti di bilancio - Annualita' successive")
 	private Double risorseBilancioSucc;
 	
 	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Primo anno")
@@ -158,7 +158,7 @@ public class DettaglioInterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Terzo anno")
 	private Double risorseArt3_3;
 	
-	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Annualità successive")
+	@ApiModelProperty(value="Finanziamenti art. 3 DL 310/1990 - Annualita' successive")
 	private Double risorseArt3_Succ;
 	
 	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Primo anno")
@@ -170,7 +170,7 @@ public class DettaglioInterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Terzo anno")
 	private Double risorseImmobili3;
 	
-	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Annualità successive")
+	@ApiModelProperty(value="Risorse derivanti da trasferimento immobili - Annualita' successive")
 	private Double risorseImmobiliSucc;
 	
 	@ApiModelProperty(value="Altra tipologia - Primo anno")
@@ -182,7 +182,7 @@ public class DettaglioInterventoAcquistoEntry implements Serializable {
 	@ApiModelProperty(value="Altra tipologia - Terzo anno")
 	private Double risorseAltro3;
 	
-	@ApiModelProperty(value="Altra tipologia - Annualità successive")
+	@ApiModelProperty(value="Altra tipologia - Annualita' successive")
 	private Double risorseAltroSucc;
 
 	public void setCui(String cui) {
